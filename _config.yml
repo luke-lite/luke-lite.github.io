@@ -87,6 +87,11 @@ footer:
       icon: "fab fa-fw fa-instagram"
       url: "https://instagram.com/"
 
+collections:
+  projects:
+    output: true
+    permalink: /:collection/:path/
+
 defaults:
   # _posts
   - scope:
@@ -107,7 +112,15 @@ defaults:
     values:
       layout: single
       author_profile: true
-      
+  # projects
+  - scope:
+      path: ""
+      type: portfolio
+    values:
+      layout: single
+      author_profile: false
+      share: true
+
 atom_feed:
   hide: true
 
