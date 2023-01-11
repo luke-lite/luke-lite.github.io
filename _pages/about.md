@@ -19,9 +19,10 @@ Interests:
 Tech Stack:
   - Python (pandas, matplotlib, seaborn, sklearn, tensorflow etc.)
   - SQL
-  - Tableau
+  - Tableau and PowerBI
 
-You can also find me at:
+<!-- You can also find me at:
   - Github
   - Email
   - Twitter
+ -->
