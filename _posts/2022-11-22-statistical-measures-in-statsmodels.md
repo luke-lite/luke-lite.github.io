@@ -28,9 +28,9 @@ Now we need the data. It will need to be stored as 2 separate matrices: one for 
 
 I am using data from the King County house sales dataset, a version of which can be found on [Kaggle](kaggle.com/datasets/harlfoxem/housesalesprediction). I have already cleaned and prepared the data, which includes over 21,000 house sales and over 20 potential variables. I want to create a linear regression model that can predict house prices, so I select several key features (variables) from the dataset that I will use in the model. Here is the first few rows of data that will be used as my independent (X) and dependent (y) variables:
 
-![X.head()](/assets/images/blog_posts/statistical measures in statsmodels/X.png)
+![X](/assets/images/blog_posts/statistical-measures-in-statsmodels/X.png)
 
-![y.head()](/assets/images/blog_posts/statistical measures in statsmodels/y.png)
+![y](/assets/images/blog_posts/statistical-measures-in-statsmodels/y.png)
 
 Now that we have the data ready, we can create the model. Normally, you would split your data into training and test sets, but that will be a topic for another post.
 
@@ -46,7 +46,7 @@ model = sm.OLS(y, X).fit()
 model.summary()
 ```
 
-![model_summary](/assets/images/blog_posts/statistical measures in statsmodels/mod_sum.png)
+![model_summary](/assets/images/blog_posts/statistical-measures-in-statsmodels/mod_sum.jpg)
 
 ## Model Overview
 
