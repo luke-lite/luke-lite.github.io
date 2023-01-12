@@ -48,7 +48,7 @@ director_graph = sns.boxplot(data=director_df,
                              showfliers=False,
                              palette=color_pal,)
 ```
-[worldwide_gross_by_director_experience_alt_color](/assets/images/blog_posts/making-boxplots-more-effective/worldwide_gross_by_director_experience_alt_color.png)
+![worldwide_gross_by_director_experience_alt_color](/assets/images/blog_posts/making-boxplots-more-effective/worldwide_gross_by_director_experience_alt_color.png)
 
 This small change allows you to further reinforce the key elements of the visualization, making it easier for viewers to see what you want them to.
 
@@ -69,7 +69,7 @@ genre_count_graph.set(xlabel='Number of Genres',
                       title='Worldwide Gross by Genre Count')
 ```
 
-[worldwide_gross_by_genre_count](/assets/images/blog_posts/making-boxplots-more-effective/worldwide_gross_by_genre_count.png)
+![worldwide_gross_by_genre_count](/assets/images/blog_posts/making-boxplots-more-effective/worldwide_gross_by_genre_count.png)
 
 Now if we add the following code to the plot, it will include text with the median values for each category.
 
@@ -90,7 +90,7 @@ for xtick in genre_count_graph.get_xticks():
                            weight='semibold')
 ```
 
-[worldwide_gross_by_genre_count_with_text](/assets/images/blog_posts/making-boxplots-more-effective/worldwide_gross_by_genre_count_with_text.png)
+![worldwide_gross_by_genre_count_with_text](/assets/images/blog_posts/making-boxplots-more-effective/worldwide_gross_by_genre_count_with_text.png)
 
 While a reader can determine a rough numeric value by using the labeled y-axis, by placing text on the graph you draw the reader's attention and highlight this key piece of information, ensuring that it will not go unnoticed.
 
@@ -98,7 +98,7 @@ While a reader can determine a rough numeric value by using the labeled y-axis, 
 
 Outliers are something that typically give people fits when trying to create a plot that is both fully explanatory and easy to parse. This is because outliers are often an important part of the dataset, and cannot be responsibly ignored. Including them, however, often makes a plot impossible to read. For example, here is the exact some plot as above, but with the outliers included:
 
-[worldwide_gross_by_genre_count_outliers](/assets/images/blog_posts/making-boxplots-more-effective/worldwide_gross_by_genre_count_outliers.png)
+![worldwide_gross_by_genre_count_outliers](/assets/images/blog_posts/making-boxplots-more-effective/worldwide_gross_by_genre_count_outliers.png)
 
 This graph does a great job of displaying the relative number of outliers in each category, but it makes comparing the boxes impossible. There are too important to the data set to exclude them entirely, so what is the solution? One answer is to include alternate datapoints that communicate the same information that the outliers do. This can be done using markers.
 
@@ -123,7 +123,7 @@ genre_count_graph.set(xlabel='Number of Genres',
                       title='Worldwide Gross by Genre Count')
 ```
 
-[worldwide_gross_by_genre_count_meanmarker](/assets/images/blog_posts/making-boxplots-more-effective/worldwide_gross_by_genre_count_meanmarker.png)
+![worldwide_gross_by_genre_count_meanmarker](/assets/images/blog_posts/making-boxplots-more-effective/worldwide_gross_by_genre_count_meanmarker.png)
 
 Now we have a legible graph that provides readers with a way to see the relative weight of outliers on the data. Because the mean values are more affected by outliers, the greater the distance between the mean and median value, the greater the weight of outliers on the data. There is an issue, however. There is no immediate way for a reader to identify that the markers represent the mean values unless they are familiar with seaborn boxplots. This leads to the next key point: legends.
 
@@ -136,7 +136,7 @@ tips = sns.load_dataset("tips")
 sns.scatterplot(data=tips, x="total_bill", y="tip", hue="time")
 ```
 
-[tips](/assets/images/blog_posts/making-boxplots-more-effective/tips.png)
+![tips](/assets/images/blog_posts/making-boxplots-more-effective/tips.png)
 
 Seaborn does this for relational plots like scatter plots because you will almost always want this information included. But when we try to add a legend to the categorical box plot we created earlier, we see that the mean marker is not included:
 
@@ -162,7 +162,7 @@ genre_count_graph.set(xlabel='Number of Genres',
 plt.legend()
 ```
 
-[worldwide_gross_by_genre_count_meanmarkers](/assets/images/blog_posts/making-boxplots-more-effective/worldwide_gross_by_genre_count_meanmarkers.png)
+![worldwide_gross_by_genre_count_meanmarkers](/assets/images/blog_posts/making-boxplots-more-effective/worldwide_gross_by_genre_count_meanmarkers.png)
 
 Instead of a legend we get an error: `'No handles with labels found to put in legend.'` So how can we include a reference to the mean marker in our legend? Matplotlib allows us to reference and access the different parts of the legend as seen in the documentation [here](matplotlib.org/stable/tutorials/intermediate/legend_guide.html) and [here](matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.legend.html#matplotlib.pyplot.legend). It’s worth learning how to better manipulate the legend, but it is a lower order concern for many users. Instead, I have a straightforward method that does not require detailed access to the legend features. Simply plot an empty scatter plot and format the markers to match your mean markers. Here is the code for the empty scatter plot:
 
@@ -172,7 +172,7 @@ plt.scatter(x=[], y=[], s=100, marker='o', color='white', edgecolor='black', lab
 
 Now when we add a legend, it automatically includes the marker from the scatter plot, without actually plotting any additional points:
 
-[worldwide_gross_by_genre_count_meanmarker_legend](/assets/images/blog_posts/making-boxplots-more-effective/worldwide_gross_by_genre_meanmarker_legend.png)
+![worldwide_gross_by_genre_count_meanmarker_legend](/assets/images/blog_posts/making-boxplots-more-effective/worldwide_gross_by_genre_meanmarker_legend.png)
 
 Now you have a quick and easy way to add whatever kind of markers you may need to a legend, regardless of the type of graph. This is not the most elegant method, but it will suffice for the vast majority of use cases.
 
@@ -219,6 +219,6 @@ plt.scatter(x=[], y=[], s=100, marker='o', color='white', edgecolor='black', lab
 plt.legend()
 ```
 
-[final_worldwide_gross_plot](/assets/images/blog_posts/making-boxplots-more-effective/final_worldwide_gross_plot.png)
+![final_worldwide_gross_plot](/assets/images/blog_posts/making-boxplots-more-effective/final_worldwide_gross_plot.png)
 
 Now you, too, can feel that much more confident in your ability to produce clean, effective box plots using seaborn. Let me know if you have any other tips you find useful, or if you want to see more like this!
