@@ -1,6 +1,6 @@
 ---
 title: Projects
-layout: single 
+layout: default 
 permalink: /projects/
 entries_layout: grid
 classes: wide
