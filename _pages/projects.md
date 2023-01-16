@@ -1,8 +1,9 @@
 ---
 title: Projects
-layout: collection
+<!-- collections layout? -->
+layout: single 
 permalink: /projects/
-collection: projects
+<!-- collection: projects -->
 entries_layout: grid
 classes: wide
 ---
