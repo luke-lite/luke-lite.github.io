@@ -24,11 +24,12 @@ The above function gets the job done, though it is far from the most efficient c
         print(f'{x} is prime: {is_prime(x)}')
 
 Output:
-  1 is prime: False
-  2 is prime: True
-  3 is prime: True
-  4 is prime: False
-  5 is prime: True
+
+    1 is prime: False
+    2 is prime: True
+    3 is prime: True
+    4 is prime: False
+    5 is prime: True
   
 It works, but how can we improve it? One way would be to increase the speed. For small numbers the computing time is negligible, but for larger numbers, the function is dividing x by every smaller integer. Another way to put this is that `x` is divided `x-2` times. This means if `x=100`, then the function is performing division 98 times. Can this be reduced? Yes!
 
@@ -79,7 +80,8 @@ import numpy as np
         
     is_prime(7)
 Output:
-True
+
+    True
 
 It's a small change, but it efectively halves the number of calculations when solving for a prime number, which becomes exponentially more efficient as the numbers get larger and larger.
 
@@ -99,7 +101,8 @@ We could use the same function from earlier by simply creating a for loop that c
     prime_list_generator(20)
     
 Output:
-[2, 3, 5, 7, 11, 13, 17, 19]
+
+    [2, 3, 5, 7, 11, 13, 17, 19]
 
 Great, it works! But this is terribly inefficient. There are a lot of repetitive and unnecessary steps since the function has to individually check every number in the list and perform many calculations to determine if each is prime. How can we solve for primes without having to prove each number up to `x` is prime?
 
@@ -111,7 +114,7 @@ When determining if `x` is prime, we first had to divide `x` by every smaller in
 
 On the other hand, how easy is it to determine if a given number is *not prime* (composite)? The answer, as it turns out, is very easy. One way is to simply find all the multiples of each prime number, starting with 2. We can eliminate the multiples since they can't be prime if they are divisible by 2. So with a minimal number of calculations, we have effectively removed half of the possible numbers from consideration (all even numbers). The next remaining number in the list of possible primes is 3. So we then remove all multiples of 3. The next remaining number is 5, because 4 was removed from consideration as it was a multiple of 2. We repeat this process up to $\sqrt{x}$ until we have removed all composite numbers, leaving only the primes! Visually, it looks like this:
 
-![]()
+![sieve_of_eratosthenes](luke-lite/solving_for_primes_in_python/Sieve_of_Eratosthenes_animation.gif)
 
 Now that we understand how the sieve works, we need to put it into code. In order to do this, I will:
 
@@ -137,7 +140,8 @@ We can stop searching for multiples of primes at $\sqrt{x}$ for the same reasons
     sieve_of_eratosthenes(30)
     
 Output:
-[2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
+
+    [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
 
 Excellent! We now have a way to return all prime numbers up to a given number `x`. I will leave you with one final version. This next version of the sieve is slightly more optimized, but also more complex. It uses a boolean array of True values instead of storing each integer. At the index location of each composite number, the boolean is changed to False. I can then use the index location of the remaining True values to find all the prime numbers. In order to do this, I will:
 
@@ -169,10 +173,11 @@ Using a boolean array is faster and more efficient than performing operations on
     sieve_of_eratosthenes(30)
     
 Output:
-[2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
+
+    [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
 
 We have now covered many of the ways in which you can solve for prime numbers using Python. There are a multitude of other methods, however, and lots of small optimizations that I have not covered. If you have other methods of solving for primes I'd love to hear them. As I mentioned, there are also lots of other more complex prime sieves. If this is something you'd like to hear more about, let me know. I'd love to do another dive into more complex prime methods. You can contact me in the following ways:
 
 luke.lite.ds@gmail.com  <br>
-[linkedin](https://www.linkedin.com/in/luke-diperna/)  <br>
+[linkedin](https://www.linkedin.com/in/luke-diperna/) <br>
 [github](https://github.com/luke-lite)
