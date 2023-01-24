@@ -1,5 +1,5 @@
 # Solving for Primes in Python
-***
+
 This is a classic coding problem that provides a lot of opportunity for creativity and ingenuity, in part because there are a number of ways to approach the problem. As is often the case, there are also a lot of small optimizations that can be found depending on what you are prioritizing. Today I want to look at a few ways to approach this problem, ending with a look at a special method I have always found fascinating: the **Sieve of Eratosthenes**.
 
 Before we jump into the code, a quick mathematics refresher: what is a prime number? A prime number is a whole number greater than 1 that is not a product of two smaller whole numbers. Alternatively, it is a number that is only cleanly divisible by itself and 1. Any whole number greater than 1 that is not a prime number is a composite number. So the first challenge will be to determine whether a given number is prime or composite.
