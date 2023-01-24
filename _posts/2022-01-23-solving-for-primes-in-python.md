@@ -1,3 +1,14 @@
+---
+title: "Solving for Primes in Python"
+last_modified_at: 2016-03-09T16:20:02-05:00
+classes: wide
+categories:
+  - Blog
+tags:
+  - python
+  - mathematics
+---
+
 # Solving for Primes in Python
 
 This is a classic coding problem that provides a lot of opportunity for creativity and ingenuity, in part because there are a number of ways to approach the problem. As is often the case, there are also a lot of small optimizations that can be found depending on what you are prioritizing. Today I want to look at a few ways to approach this problem, ending with a look at a special method I have always found fascinating: the **Sieve of Eratosthenes**.
