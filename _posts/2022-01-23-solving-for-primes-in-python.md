@@ -114,7 +114,7 @@ When determining if `x` is prime, we first had to divide `x` by every smaller in
 
 On the other hand, how easy is it to determine if a given number is *not prime* (composite)? The answer, as it turns out, is very easy. One way is to simply find all the multiples of each prime number, starting with 2. We can eliminate the multiples since they can't be prime if they are divisible by 2. So with a minimal number of calculations, we have effectively removed half of the possible numbers from consideration (all even numbers). The next remaining number in the list of possible primes is 3. So we then remove all multiples of 3. The next remaining number is 5, because 4 was removed from consideration as it was a multiple of 2. We repeat this process up to $\sqrt{x}$ until we have removed all composite numbers, leaving only the primes! Visually, it looks like this:
 
-[solving_for_primes_in_python/Sieve_of_Eratosthenes_animation.gif](https://github.com/luke-lite/solving_for_primes_in_python/blob/ca9b7eae4b8192aa7528a95df2a796fb421a4053/Sieve_of_Eratosthenes_animation.gif)
+![solving_for_primes_in_python/Sieve_of_Eratosthenes_animation.gif](https://github.com/luke-lite/solving_for_primes_in_python/blob/ca9b7eae4b8192aa7528a95df2a796fb421a4053/Sieve_of_Eratosthenes_animation.gif)
 
 Now that we understand how the sieve works, we need to put it into code. In order to do this, I will:
 
