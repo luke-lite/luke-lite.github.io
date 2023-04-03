@@ -1,9 +1,9 @@
 ---
+layout: single
+classes: wide
 title: Bank Account Fraud Detection
 header:
   teaser: assets/images/project_images/online_transaction.jpg
-layout: single
-classes: wide
 categories:
   - Project
 tags:
