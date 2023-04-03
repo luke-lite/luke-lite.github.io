@@ -1,7 +1,7 @@
 ---
 title: "Landing Page"
 layout: splash
-permalink: /splash-page/
+<!-- permalink: /splash-page/ -->
 <!-- date: -->
 header:
   overlay_color: "#000"
