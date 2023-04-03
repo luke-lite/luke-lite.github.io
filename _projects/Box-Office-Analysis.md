@@ -1,4 +1,6 @@
 ---
+layout: single
+classes: wide
 title: Box Office Analysis
 header:
   teaser: assets/images/project_images/movie_clapper.jpg
