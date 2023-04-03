@@ -3,7 +3,7 @@ title: "Splash Page"
 layout: splash
 permalink: /splash-page/
 header:
-  overlay_image: /assets/images/header-splash.jpeg
+  image: /assets/images/header-splash.jpeg
   actions:
     - label: "Download"
       url: "#test-link"
