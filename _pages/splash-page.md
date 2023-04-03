@@ -4,9 +4,9 @@ layout: splash
 permalink: /splash-page/
 header:
   image: /assets/images/header-splash.jpeg
-  actions:
+<!--   actions:
     - label: "Download"
-      url: "#test-link"
+      url: "#test-link" -->
 excerpt: "Bacon ipsum dolor sit amet salami ham hock ham, hamburger corned beef short ribs kielbasa biltong t-bone drumstick tri-tip tail sirloin pork chop."
 
 ---
