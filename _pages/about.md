@@ -2,8 +2,7 @@
 permalink: /about/
 title: "About"
 header:
-  image: /assets/images/trim-splash.jpg
-  
+  image: /assets/images/trim-splash.jpg 
 ---
 
 My name is Luke DiPerna. I'm a data guy with a background in education, literature, and athletics. I have taught students from as young as 18 months to as old as 72, I used to coach high school football and basketball, and I spent several years of my life researching and writing about postmoden American literature. After all of that, I finally decided to pursue a career in a long-time passion of mine: data.
