@@ -4,7 +4,7 @@ classes: wide
 title: Box Office Analysis
 header:
   teaser: assets/images/project_images/movie_clapper.jpg
-author_profile = true
+author_profile: true
 categories:
   - Project
 tags:
