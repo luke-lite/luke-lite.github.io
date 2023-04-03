@@ -6,7 +6,7 @@ header:
   image: /assets/images/header-splash.jpeg
 <!--   actions:
     - label: "Download"
-      url: "#test-link" -->
-excerpt: "Bacon ipsum dolor sit amet salami ham hock ham, hamburger corned beef short ribs kielbasa biltong t-bone drumstick tri-tip tail sirloin pork chop."
+      url: "#test-link"
+excerpt: "Bacon ipsum dolor sit amet salami ham hock ham, hamburger corned beef short ribs kielbasa biltong t-bone drumstick tri-tip tail sirloin pork chop." -->
 
 ---
