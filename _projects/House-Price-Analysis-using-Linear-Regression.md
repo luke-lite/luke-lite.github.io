@@ -1,5 +1,6 @@
 ---
 layout: single
+classes: wide
 title: House Price Analysis using Linear Regression
 header:
   teaser: assets/images/project_images/houses.jpg
