@@ -3,8 +3,8 @@ title: "Splash Page"
 layout: splash
 permalink: /splash-page/
 header:
-  overlay_color: "#100"
-  overlay_filter: "0.1"
+  overlay_color: "#900"
+  overlay_filter: "0.9"
   overlay_image: /assets/images/header-splash.jpeg
   actions:
     - label: "Download"
