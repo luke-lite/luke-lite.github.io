@@ -120,6 +120,7 @@ defaults:
       layout: single
       author_profile: true
       share: true
+      classes: wide
 
 atom_feed:
   hide: true
