@@ -3,6 +3,7 @@ layout: single
 classes: wide
 author_profile: true
 title: Jacksonville Housing Prices Time Series Analysis
+excerpt: Using time series to forecast changes in housing prices for prospective clients
 header:
   teaser: assets/images/teasers/jax_skyline.jpg
 categories:
