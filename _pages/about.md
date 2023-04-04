@@ -18,10 +18,10 @@ My name is Luke DiPerna. I'm a data guy with a background in education, literatu
 
 [Articles:](#https://luke-lite.github.io/posts/){: .btn .btn--warning} Writing I have done related to my data science work as well as other personal interests.
 
-Interests:
+<!-- Interests:
   - Bias and Fairness in Machine Learning
   - NLP (Natural Language Processing) and Linguistic Analysis
-  - Sports Data Analysis and Applications
+  - Sports Data Analysis and Applications -->
 
 <!-- You can also find me at:
   - Github
