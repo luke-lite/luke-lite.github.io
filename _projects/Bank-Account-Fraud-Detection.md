@@ -3,6 +3,7 @@ layout: single
 classes: wide
 author_profile: true
 title: Bank Account Fraud Detection
+excerpt: Leveraging ML on big data and evaluating bias and fairness in ML.
 header:
   teaser: assets/images/teasers/online_transaction.jpg
 categories:
