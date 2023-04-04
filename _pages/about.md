@@ -2,26 +2,26 @@
 permalink: /about/
 title: "About"
 header:
-  image: /assets/images/trim-splash.jpg 
+  image: /assets/images/trim-splash.jpg
+classes: wide
 ---
 
-My name is Luke DiPerna. I'm a data guy with a background in education, literature, and athletics. I have taught students from as young as 18 months to as old as 72, I used to coach high school football and basketball, and I spent several years of my life researching and writing about postmoden American literature. After all of that, I finally decided to pursue a career in a long-time passion of mine: data.
+My name is Luke DiPerna. I'm a data guy with a background in education, literature, and athletics. I have taught students from as young as 18 months to as old as 72, I used to coach high school football and basketball, and I spent several years researching and writing about postmoden American literature. After all of that, I decided to pursue a career in a long-time passion of mine: data.
 
-I have experience working with a large variety of data analytics and data science tools, the results of which can be found on this site. 
+**Proficiencies:**
+* SQL
+* Python
+* Machine Learning
+* Tableau and PowerBI
 
-For a look at some of the end-to-end data science projects I have built, including a bank fraud detection machine-learning algorithm that accounts for bias and discrimination, click [here]
+[Projects:](#https://luke-lite.github.io/projects/){: .btn .btn--primary} Here you can find data science projects showcasing my application of machine learning and statistical analysis to provide tangible business insights, including: bank fraud detection, housing price forecasting, and NBA analytics.
 
-To see my data-related blog posts, click [here]
+[Articles:](#https://luke-lite.github.io/posts/){: .btn .btn--warning} Writing I have done related to my data science work as well as other personal interests.
 
-Interests:
+<!-- Interests:
   - Bias and Fairness in Machine Learning
   - NLP (Natural Language Processing) and Linguistic Analysis
-  - Sports Data Analysis and Applications
-
-Tech Stack:
-  - Python (pandas, matplotlib, seaborn, sklearn, tensorflow etc.)
-  - SQL
-  - Tableau and PowerBI
+  - Sports Data Analysis and Applications -->
 
 <!-- You can also find me at:
   - Github

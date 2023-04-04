@@ -2,6 +2,7 @@
 title: "Solving for Primes in Python"
 last_modified_at: 2016-03-09T16:20:02-05:00
 classes: wide
+mathjax: true
 categories:
   - Blog
 tags:
@@ -75,7 +76,7 @@ Looking at the example above, however, demonstrates that we don't actually need 
 12 * 3  <br>
 18 * 2  <br>
 
-This time we see that there are no unique pairs after n=6. Do you see the connection yet? In each case, we only need to check each whole number up to $\sqrt{x}$. So when `x=16`, we can stop checking after $\sqrt{16}$, which is 4. When `x=36`, we stop checking after $\sqrt{36}$, which is 6. Here is the updated function with this addition:
+This time we see that there are no unique pairs after n=6. Do you see the connection yet? In each case, we only need to check each whole number up to $$\sqrt{x}$$. So when `x=16`, we can stop checking after $$\sqrt{16}$$, which is 4. When `x=36`, we stop checking after $$\sqrt{36}$$, which is 6. Here is the updated function with this addition:
 ```python
 # import for square root function
 import numpy as np
@@ -131,9 +132,9 @@ One answer lies in the **Sieve of Eratosthenes**, an algorithm first referenced 
 
 This method functions in a seemingly backwards fashion. Instead of identifying all the prime numbers up to a given number `x`, the Sieve of Eratosthenes identifies all the composite numbers and removes them, leaving only the prime numbers! Though this seems backwards, it turns out that identifying composities is a lot easier than identifying primes. If we think back to our earlier attempts, we can see why this is.
 
-When determining if `x` is prime, we first had to divide `x` by every smaller integer betweeen 2 and `x`. Even after our improvement of using $\sqrt{x}$ instead of `x`, there are still a lot of calculations that need to be performed before we can verify that `x` is prime, and the number of calculations increases exponentially as `x` increases.
+When determining if `x` is prime, we first had to divide `x` by every smaller integer betweeen 2 and `x`. Even after our improvement of using $$\sqrt{x}$$ instead of `x`, there are still a lot of calculations that need to be performed before we can verify that `x` is prime, and the number of calculations increases exponentially as `x` increases.
 
-On the other hand, how easy is it to determine if a given number is *not prime* (composite)? The answer, as it turns out, is very easy. One way is to simply find all the multiples of each prime number, starting with 2. We can eliminate the multiples since they can't be prime if they are divisible by 2. So with a minimal number of calculations, we have effectively removed half of the possible numbers from consideration (all even numbers). The next remaining number in the list of possible primes is 3. So we then remove all multiples of 3. The next remaining number is 5, because 4 was removed from consideration as it was a multiple of 2. We repeat this process up to $\sqrt{x}$ until we have removed all composite numbers, leaving only the primes! Visually, it looks like this:
+On the other hand, how easy is it to determine if a given number is *not prime* (composite)? The answer, as it turns out, is very easy. One way is to simply find all the multiples of each prime number, starting with 2. We can eliminate the multiples since they can't be prime if they are divisible by 2. So with a minimal number of calculations, we have effectively removed half of the possible numbers from consideration (all even numbers). The next remaining number in the list of possible primes is 3. So we then remove all multiples of 3. The next remaining number is 5, because 4 was removed from consideration as it was a multiple of 2. We repeat this process up to $$\sqrt{x}$$ until we have removed all composite numbers, leaving only the primes! Visually, it looks like this:
 
 ![Sieve_of_Eratosthenes_animation](/assets/images/blog_posts/Sieve_of_Eratosthenes_animation.gif)
 By SKopp at [German Wikipedia](https://upload.wikimedia.org/wikipedia/commons/b/b9/Sieve_of_Eratosthenes_animation.gif)
@@ -142,9 +143,9 @@ Now that we understand how the sieve works, we need to put it into code. In orde
 
  - create a list of numbers from 2 to x.
  - starting at 2, remove all multiples of each prime from the list
- - repeat up to the value of $\sqrt{x}$
+ - repeat up to the value of $$\sqrt{x}$$
  
-We can stop searching for multiples of primes at $\sqrt{x}$ for the same reasons we discussed earlier (no new prime factors).
+We can stop searching for multiples of primes at $$\sqrt{x}$$ for the same reasons we discussed earlier (no new prime factors).
 
 ```python
 def sieve_of_eratosthenes(x):
@@ -173,7 +174,7 @@ Excellent! We now have a way to return all prime numbers up to a given number `x
 
  - create a boolean array of length `x-2` all set to `True`.
  - starting at 2, set all multiples of each prime equal to False
- - repeat up to the value of $\sqrt{x}$
+ - repeat up to the value of $$\sqrt{x}$$
  - the remaining True values are all prime numbers
 
 Using a boolean array is faster and more efficient than performing operations on a list of numbers (especially as `x` increases), but as you can see, the code is more abstracted and not as immediately comprehensible.
