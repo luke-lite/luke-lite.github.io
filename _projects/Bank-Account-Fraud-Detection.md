@@ -4,7 +4,7 @@ classes: wide
 author_profile: true
 title: Bank Account Fraud Detection
 header:
-  teaser: assets/images/project_images/online_transaction.jpg
+  teaser: assets/images/teasers/online_transaction.jpg
 categories:
   - Project
 tags:
