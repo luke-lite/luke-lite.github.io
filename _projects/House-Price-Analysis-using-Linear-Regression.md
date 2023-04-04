@@ -104,9 +104,9 @@ This was a slight surprise, since one of the causes of heteroscedasticity is mul
 
 I also examined the model statistics using `statsmodels`. Here are the results (with the coefficients removed due to the large number of them):
 
-[model_summary_overview]({site.url}}/assets/images/project_posts/Residential-Real-Estate-Analysis-graphs/model_summary_overview.jpg)
+![model_summary_overview]({site.url}}/assets/images/project_posts/Residential-Real-Estate-Analysis-graphs/model_summary_overview.jpg)
 
-[model_summary_metrics]({site.url}}/assets/images/project_posts/Residential-Real-Estate-Analysis-graphs/model_summary_metrics.jpg)
+![model_summary_metrics]({site.url}}/assets/images/project_posts/Residential-Real-Estate-Analysis-graphs/model_summary_metrics.jpg)
 
 Key takeaways:
 - the Omnibus score, as well as the Jarque-Bera score, confirm that the model fails the normality assumption.
