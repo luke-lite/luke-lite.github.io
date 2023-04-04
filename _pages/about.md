@@ -13,9 +13,11 @@ My name is Luke DiPerna. I'm a data guy with a background in education, literatu
 * Machine Learning
 * Tableau and PowerBI
 
-[Projects:](#https://luke-lite.github.io/projects/){: .btn .btn--primary} Here you can find data science projects showcasing my application of machine learning and statistical analysis to provide tangible business insights, including: bank fraud detection, housing price forecasting, and NBA analytics.
+[Projects:](#https://luke-lite.github.io/projects/){: .btn .btn--primary}
+Here you can find data science projects showcasing my application of machine learning and statistical analysis to provide tangible business insights, including: bank fraud detection, housing price forecasting, and NBA analytics.
 
-[Articles:](#https://luke-lite.github.io/posts/){: .btn .btn--warning} Writing I have done related to my data science work as well as other personal interests.
+[Articles:](#https://luke-lite.github.io/posts/){: .btn .btn--warning}
+Writing I have done related to my data science work as well as other personal interests.
 
 Interests:
   - Bias and Fairness in Machine Learning
