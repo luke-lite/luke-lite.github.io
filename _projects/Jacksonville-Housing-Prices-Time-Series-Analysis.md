@@ -4,7 +4,7 @@ classes: wide
 author_profile: true
 title: Jacksonville Housing Prices Time Series Analysis
 header:
-  teaser: assets/images/project_images/jax_skyline.jpg
+  teaser: assets/images/teasers/jax_skyline.jpg
 categories:
   - Project
 tags:
