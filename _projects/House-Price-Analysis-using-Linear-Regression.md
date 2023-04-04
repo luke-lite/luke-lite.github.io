@@ -102,10 +102,8 @@ This was a slight surprise, since one of the causes of heteroscedasticity is mul
 
 I also examined the model statistics using `statsmodels`. Here are the results (with the coefficients removed due to the large number of them):
 
-Overview:
 ![model_summary_overview]({{site.url}}/assets/images/project_posts/Residential-Real-Estate-Analysis-graphs/model_summary_overview.jpg)
 
-Metrics:
 ![model_summary_metrics]({{site.url}}/assets/images/project_posts/Residential-Real-Estate-Analysis-graphs/model_summary_metrics.jpg)
 
 Key takeaways:
