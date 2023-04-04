@@ -17,6 +17,8 @@ title: luke-lite DS
 email: luke.lite.ds@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Luke DiPerna portfolio site with data science projects, data analysis tools, and blog posts.
+url: "https://luke-lite.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+# baseurl: # the subpath of your site, e.g. "/blog"
 twitter_username: luke_lite_
 github_username: luke-lite
 minimal_mistakes_skin: "air" # "air", "aqua", "contrast", "dark", "default", "dirt", "neon", "mint", "plum", "sunrise"
