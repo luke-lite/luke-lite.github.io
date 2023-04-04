@@ -5,9 +5,7 @@ author_profile: true
 title: Box Office Analysis
 excerpt:
 header:
-  teaser: assets/images/project_images/movie_clapper.jpg
-categories:
-  - Project
+  teaser: assets/images/teasers/movie_clapper.jpg
 tags:
   - data analysis
   - regression
