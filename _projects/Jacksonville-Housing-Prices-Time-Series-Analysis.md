@@ -10,7 +10,7 @@ tags:
   - time series
   - forecasting
 ---
-![jax_skyline](https://github.com/luke-lite/Jacksonville-Housing-Prices-Time-Series-Analysis/blob/b13235d253d31b86c32ed238273c4c6157d5fa03/jax_skyline.jpg)
+![jax_skyline](https://github.com/luke-lite/Jacksonville-Housing-Prices-Time-Series-Analysis/graphs/jax_skyline.jpg)
 
 For a more detailed analysis, check out the full repo here: [Github](https://github.com/luke-lite/Jacksonville-Housing-Prices-Time-Series-Analysis/){: .btn .btn--primary} You can even copy the notebook and run the code yourself.
 
