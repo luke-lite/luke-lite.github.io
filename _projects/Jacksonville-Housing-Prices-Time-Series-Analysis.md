@@ -4,14 +4,13 @@ classes: wide
 title: Jacksonville Housing Prices Time Series Analysis
 header:
   teaser: assets/images/project_images/jax_skyline.jpg
-toc: true
 categories:
   - Project
 tags:
   - time series
   - forecasting
 ---
-![jax_skyline](assets/images/teasers/jax_skyline.jpg)
+![jax_skyline](https://github.com/luke-lite/luke-lite.github.io/blob/fe3f5742335ee0d7cefe3fa4029aea0a0aafbdcd/assets/images/teasers/jax_skyline.jpg)
 
 For a more detailed analysis, check out the full repo here: [Github](https://github.com/luke-lite/Jacksonville-Housing-Prices-Time-Series-Analysis/){: .btn .btn--primary} You can even copy the notebook and run the code yourself.
 
