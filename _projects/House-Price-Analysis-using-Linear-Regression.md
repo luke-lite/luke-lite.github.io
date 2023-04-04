@@ -6,8 +6,8 @@ title: House Price Analysis using Linear Regression
 excerpt: 
 header:
   teaser: assets/images/teasers/houses.jpg
-categories:
-  - Project
+<!-- categories:
+  - Project -->
 tags:
   - linear regression
   - statistics
