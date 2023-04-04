@@ -12,7 +12,8 @@ My name is Luke DiPerna. I'm a data guy with a background in education, literatu
 * Python
 * Machine Learning
 * Tableau and PowerBI
- {: .notice--success}{% raw %}{% capture notice-2 %} -->
+ {: .notice--success} -->
+{% raw %}{% capture notice-2 %}
 **Proficiencies:**
 * SQL
 * Python
