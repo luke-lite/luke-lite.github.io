@@ -75,7 +75,7 @@ Looking at the example above, however, demonstrates that we don't actually need 
 12 * 3  <br>
 18 * 2  <br>
 
-This time we see that there are no unique pairs after n=6. Do you see the connection yet? In each case, we only need to check each whole number up to $\sqrt{x}$. So when `x=16`, we can stop checking after $\sqrt{16}$, which is 4. When `x=36`, we stop checking after $\sqrt{36}$, which is 6. Here is the updated function with this addition:
+This time we see that there are no unique pairs after n=6. Do you see the connection yet? In each case, we only need to check each whole number up to $\sqrt{x}$. So when `x=16`, we can stop checking after $$\sqrt{16}$$, which is 4. When `x=36`, we stop checking after $\sqrt{36}$, which is 6. Here is the updated function with this addition:
 ```python
 # import for square root function
 import numpy as np
