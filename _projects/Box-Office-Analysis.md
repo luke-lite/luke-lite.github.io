@@ -3,7 +3,7 @@ layout: single
 classes: wide
 author_profile: true
 title: Box Office Analysis
-excerpt
+excerpt:
 header:
   teaser: assets/images/project_images/movie_clapper.jpg
 categories:
