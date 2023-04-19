@@ -63,7 +63,7 @@ I used the average median house price data from all Jacksonville zip codes to tr
 
 ![train_model_pred]({{site.url}}/assets/images/project_posts/Jacksonville-Housing-Prices-Time-Series-Analysis-graphs/train_model_pred.png)
 
-As expected, it was unable to anticipate the increase in price growth in the test set. However, I used the same parameters when training a model on the entire dataset, as it provided the best results. The diagnostics of the model trained on the entire set are shown below, and display the expceted issues of an increase in residuals at the tail end, and deviation in the QQ-plot and correlogram:
+As expected, it was unable to anticipate the increase in price growth in the test set. However, I used the same parameters when training a model on the entire dataset, as it provided the best results. The diagnostics of the model trained on the entire set are shown below, and display the expected issues of an increase in residuals at the tail end, and deviation in the QQ-plot and correlogram:
 
 ![X_model_diag]({{site.url}}/assets/images/project_posts/Jacksonville-Housing-Prices-Time-Series-Analysis-graphs/X_model_diag.png)
 
