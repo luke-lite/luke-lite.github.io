@@ -1,8 +1,8 @@
-<!-- ---
+---
 title: "Web Scraping NBA Stats in Python"
 last_modified_at: 2023-04-21T16:22:02-05:00
 classes: wide
-mathjax: true
+<!-- mathjax: true -->
 categories:
   - Blog
 tags:
@@ -11,11 +11,11 @@ tags:
   - selenium
   - nba
 ---
-_using Selenium and Beautiful Soup_
+<!-- _using Selenium and Beautiful Soup_
 
 Getting the right data is hard. In fact, it's almost always the hardest, longest, and most arduous part. I recently needed to get a huge amount of NBA stats for a project I'm working on. I knew the information existed, spread across a number of publicly available websites, but I had no easy way to directly access it. The answer was web scraping.
 
-In this article I will demonstrate a simply web scraping example for anyone who might be new to the process. It can seem daunting at first, but with a little bit of knowledge it is very manageable.
+In this article I will demonstrate a simply web scraping example for anyone who might be new to the process. It can seem daunting at first, but with a little bit of knowledge it is very manageable. Today's example involves NBA stats, but the web scraping techniques I cover can be applied to most situations.
 
 Web scraping is the process of accessing a webpage, and pulling (or scraping) the information you want from it. If you only need a little information from just a page or two, it is easy enough to transcribe whatever you need. The real power of web scraping comes from the ability to automate the process in order to gather huge amounts of data.
 
@@ -33,6 +33,14 @@ According to their policies, you can web scrape as long as you meet a series of 
 
 Since today's example is just some boxscore data from a single NBA game, we are in the clear.
 
-The first step is to 
+The first step is to find the information we want to scrape. For this example, I'm interested in getting the boxscore stats from what is considered by many to be one of the greatest basketball games of all time: Celtics vs. Suns Game 5 of the 1976 NBA Finals. After navigating the site, I manage to find what I'm looking for: 
+
+[Game 5](https://www.basketball-reference.com/boxscores/197606040BOS.html)
+
+You can save yourself a lot of time and frustration by being certain what kind of information is accessible on the webpage and what exactly you need from it. There's a lot of information available After looking around, I determine that I want to scrape the boxscore stats for each team. 
+
+
+
+
 
 best game all time: celtics suns game 5 1976 finals -->
