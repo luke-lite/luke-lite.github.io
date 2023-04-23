@@ -37,7 +37,43 @@ The first step is to find the information we want to scrape. For this example, I
 
 [Game 5](https://www.basketball-reference.com/boxscores/197606040BOS.html)
 
-You can save yourself a lot of time and frustration by being certain what kind of information is accessible on the webpage and what exactly you need from it. There's a lot of information available After looking around, I determine that I want to scrape the boxscore stats for each team. 
+You can save yourself a lot of time and frustration by being certain what kind of information is accessible on the webpage and what exactly you need from it. There's a lot of information available. I'm only interested in the boxscores for each team. Now that I have identified the data I need, we can get our code ready to scrape it.
+
+I will be using two main packages: [Selenium](https://www.selenium.dev/selenium/docs/api/py/index.html) and [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/). It is worth noting that the simple web scraping I am going to demonstrate could be done using either package by itself, but I will introduce both since they are the two premier web scraping packages. In general, Beautiful Soup is easier to use, but has less functionality than Selenium.
+
+To start, I need to import the necessary packages:
+
+;;;;;;;;;;;;
+
+Now I need to take a closer look at the webpage. Interacting with the various elements of the webpage requires a little knowledge about how a webpage is displayed, but I promise to only keep things on a need-to-know basis for this demonstration. Most webpages are constructed using html or xml. There is a lot more going on, of course, but for now we will focus on that. I could pull _all_ the information from the webpage and then try to whittle it down, but it will be much easier if I know what I'm looking for. To get a better look at the webpage's underlying code, you can simply right-click on the webpage and select 'Inspect'. This will pull up a window that contains detailed information about what is happening under the hood. It may look a bit different depending on your OS and browser, but it should look something like this (Windows Chrome):
+
+;;;;;;;;;;;
+
+The sheer amount of information can be a little overwhelming, but we want to focus on the html elements that can be found in the highlighted region:
+
+;;;;;;;;;;
+
+This displays all the basic information contained on the webpage, but stripped of all visual elements. The important thing to keep in mind is that html is written using tags, indicated by <> brackets. For example, the website header is denoted by the <head> tag. Within the <head> tag might just be a single picee of text, or it may have a series of other tags nested within it, depending on the complexity of the webpage. But everything between <head> and </head> (end tags include a '/') is considered to be part of the header.
+
+As you can see by looking through the html on this page, the nested structures can get very large very fast. Instead of searching through all the tags to find the information, we can get it directly by right-clicking the specific information we want and selecting 'Inspect'. Since I want the boxscores, I will right click the boxscore title here:
+ 
+;;;;;;;;;;
+
+This time, the console shows the html of the specific item we selected:
+
+;;;;;;;;;
+
+Great. The table's title is within the <h2> tag, which is within a <div> tag. Another great feature is that while you have the console open, if you hover your mouse over any of the html elements, the corresponding information will be highlighted in your browser. This makes it significantly easier to narrow down to exactly what you want. If you look at some of the elements near the title we inspected, you see that the actual table, which contains all the data we want, is actually in a different tag:
+
+;;;;;;;;;;;;
+
+Opening the path for this <div> tag shows the table nested within in, and within that, all the information in each cell, broken down by row and column. It should look something like this:
+
+;;;;;;;;;;;
+
+The important things to note are the various sections: <thead> contains the column headers, and <tbody> contains each <tr> (table row), and within each row is the individual <td> cells with the data. Now we know the exact html path for the data we need!
+
+I can use Selenium to access the 
 
 
 
