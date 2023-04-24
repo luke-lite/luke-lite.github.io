@@ -134,9 +134,22 @@ player_stats = [[stat.text.strip() for stat in row.findAll('td')] for row in dat
 
 Now that everything has been trimmed down to just the raw data, it is straightforward enough to put it all together in a dataframe:
 
+`
+for i in range(len(player_stats)):
+    # ignore header with i+1
+    player_stats[i].insert(0, player_names[i+1])
 
+# create player stats dataframe
+player_box_df = pd.DataFrame(player_stats, columns=headerlist)
+# drop 'Reserves' row
+player_box_df.drop(player_box_df[player_box_df['Starters'] == 'Reserves'].index, inplace=True)
+player_box_df.rename(columns={'Starters':'Players'}, inplace=True)
+`
 
+And here is the result:
 
+;;;;;;;;;;;;
 
-
-best game all time: celtics suns game 5 1976 finals -->
+Of course, this is only for one team. The next step would be to write some functions and loop them so that the code will automatically create and reformat the data as needed.
+  
+At this point, you might be thinking that transcribing the 2 boxscores by hand would have porbably taken less time. And you would be right. But the real power of web scraping comes from automation of large tasks. Once the code is written to get data from a single webpage, it can be scaled up to include thousands of webpages with relative ease. Maybe next time I will take a look at how to effectively scale up your web scraper. Let me know what you think!-->
