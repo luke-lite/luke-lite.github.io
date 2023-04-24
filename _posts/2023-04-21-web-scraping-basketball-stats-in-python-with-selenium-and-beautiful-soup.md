@@ -73,7 +73,23 @@ Opening the path for this <div> tag shows the table nested within in, and within
 
 The important things to note are the various sections: <thead> contains the column headers, and <tbody> contains each <tr> (table row), and within each row is the individual <td> cells with the data. Now we know the exact html path for the data we need!
 
-I can use Selenium to access the 
+I can use Selenium to access the webpage by activating a driver. I am using Chrome as my web browser, but if you are using something different be sure to change the driver:
+
+;;;;;;;;;;;;
+
+This will open a seperate Chrome window that should be mostly blank with the message:  "Chrome is being controlled by automated test software." You now have a Chrome instance that you can control with your code. Next, open the url using the following line of code:
+
+;;;;;;;;;;;;;
+
+Now the Chrome test window should be at the url we need. We can get the webpage source code with the following line:
+
+`src = driver.page_source`
+
+And with that, we are done with Selenium for the time being. There are a lot of other great features that Selenium offers, like being able to interact with dynamic elements of a webpage such as clicking buttons, enter information into fields, and selecting items from a drop-down menu, but I will save those topics for a different time. Now we will switch to Beautiful Soup to pull out the information we need from the source code.
+
+`parser = BeautifulSoup(src, 'lxml')`
+
+Here, we are telling Beautiful Soup that the information is html/xml, which is why we need to include the `'lxml'`. 
 
 
 
