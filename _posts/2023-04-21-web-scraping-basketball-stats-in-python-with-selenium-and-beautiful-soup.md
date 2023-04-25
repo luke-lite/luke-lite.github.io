@@ -11,15 +11,14 @@ tags:
   - beautiful soup
   - nba
 ---
-<!--
 _using Selenium and Beautiful Soup_
 
-Getting the right data is hard. In fact, it's almost always the hardest, longest, and most arduous part. I recently needed to get a huge amount of NBA stats for a project I'm working on. I knew the information existed, spread across a number of publicly available websites, but I had no easy way to directly access it. The answer was web scraping. If you are interested in following along step-by-step, you can find a jupyter notebook in the [github repo]() that has everything you need to run the code yourself.
+Getting the right data is hard. In fact, it's almost always the hardest, longest, and most arduous part. I recently needed to get a huge amount of NBA stats for a project I'm working on. I knew the information existed, spread across a number of publicly available websites, but I had no easy way to directly access it. The answer was web scraping. If you are interested in following along step-by-step, you can find a jupyter notebook in my [github repo](https://github.com/luke-lite/web-scraping-demo) that has everything you need to run the code yourself.
 
-**Note:** this article assumes a basic knowledge of python.
+**Note:** this article assumes a basic understanding of python.
 {: .notice--primary}
 
-In this article I will demonstrate a simple web scraping example for anyone who might be new to the process. It can seem daunting at first, but with a little bit of knowledge it is very manageable. Today's example involves NBA stats, but the web scraping techniques I cover can be applied to most situations. It is worth noting that web scraping is rarely the first resort. If the website has a functioning API, then that is typically a much faster and easier way of getting the data you need. But there are a few problems with APIs. It may only allow you to get certain types of data, or may not include everything you need. Additionally, companies and services can change or end API access without warning. Nonetheless, always check for APIs first.
+In this article I will demonstrate a simple web scraping example for anyone who might be new to the process. It can seem daunting at first, but with a little bit of know-how it is very manageable. Today's example involves NBA stats, but the web scraping techniques I cover can be applied to most situations. It is worth noting that web scraping is rarely the first resort. If the website has a functioning API, then that is typically a much faster and easier way of getting the data you need. But there are a few problems with APIs. It may only allow you to get certain types of data, or may not include everything you need. Additionally, companies and services can change or end API access without warning. Nonetheless, always check for APIs first.
 
 Web scraping is the process of accessing a webpage, and pulling (or scraping) the information you want from it. If you only need a little information from just a page or two, it is easy enough to transcribe whatever you need. The real power of web scraping comes from the ability to automate the process in order to gather huge amounts of data.
 
@@ -53,29 +52,29 @@ import pandas as pd
 
 Now I need to take a closer look at the webpage. Interacting with the various elements of the webpage requires a little knowledge about how a webpage is displayed, but I promise to only keep things on a need-to-know basis for this demonstration. Most webpages are constructed using html or xml. There is a lot more going on, of course, but for now we will focus on that. To get a better look at the webpage's underlying code, you can simply right-click on the webpage and select 'Inspect'. This will pull up a Developer Tools window that contains detailed information about what is happening under the hood. It may look a bit different depending on your OS and browser, but it should look something like this (I'm using Windows Chrome):
 
-![developer_tools](/assets/images/blog_posts/)
+![developer_tools](/assets/images/blog_posts/web-scraping-basketball-stats-in-python-with-selenium-and-beautiful-soup/developer_tools.png)
 
 The sheer amount of information can be a little overwhelming, but we want to focus on the html elements that can be found in the highlighted region:
 
-![developer_tools_highlight](/assets/images/blog_posts/)
+![developer_tools_highlight](/assets/images/blog_posts/web-scraping-basketball-stats-in-python-with-selenium-and-beautiful-soup/developer_tools_highlight.png)
 
 This displays all the basic information contained on the webpage, but stripped of all visual elements. The important thing to keep in mind is that html is written using tags, indicated by <> brackets. For example, the "header" section is usually denoted by the <head> tag. Within the <head> tag might just be a single picee of text, or it may have a series of other tags nested within it, depending on the complexity of the webpage. But everything between <head> and </head> (end tags include a '/') is considered to be part of the <head> section.
 
 As you can see by looking through the html on this page, the nested structures can get very large, very fast. Instead of searching through all the tags to find the information we need, we can get it directly by right-clicking the specific information we want and selecting 'Inspect'. Since I want the boxscores, I will right click the "Phoenix Suns Basic and Advanced Stats" title here:
- 
-![boxscore_title_html]()
+
+![boxscore_title_html](/assets/images/blog_posts/web-scraping-basketball-stats-in-python-with-selenium-and-beautiful-soup/boxscore_title_html.png)
 
 This time, notice how the Developer Tools window shows us the exact html element that corresponds to the title we clicked on. The title is within an <h2> tag, which is within a <div> tag. The <div> tag is used to separate different divisions, or sections of the webpage. Also notice how the div tag has some specific attributes (class and id). These are used to easily distinguish and organize the various <div> elements:
- 
-![boxscore_title_div]()
+
+![boxscore_title_div](/assets/images/blog_posts/web-scraping-basketball-stats-in-python-with-selenium-and-beautiful-soup/boxscore_title_div.png)
 
 Another great feature of the Developer Tools is that while you have the console open, if you hover your mouse over any of the html elements, the corresponding information will be highlighted in your browser. This makes it significantly easier to narrow down to exactly what you want. If you look at some of the elements near the title we inspected, you see that the actual table, which contains all the data we want, is actually in a different tag:
 
-![boxscore_table]()
+![boxscore_table](/assets/images/blog_posts/web-scraping-basketball-stats-in-python-with-selenium-and-beautiful-soup/boxscore_table.png)
 
 Opening the path for this <div> tag shows the table nested within, and within that, all the information in each cell, broken down by row and column. It should look something like this:
 
-![table_tags]()
+![table_tags](/assets/images/blog_posts/web-scraping-basketball-stats-in-python-with-selenium-and-beautiful-soup/table_tags.png)
 
 The important things to note are the various sections: <thead> contains the column headers, and <tbody> contains each <tr> (table row), and within each row is the individual <td> cells with the data. Now we know the exact html path for the data we need!
 
@@ -126,13 +125,15 @@ rows = stat_tables[0].findAll('tr')
 
 Looking at the results, the very first element in the list is an 'overheader' column, but the rest of them appear to be exactly what we want. Let's ignore the first element this time:
 
-`rows = stat_tables[0].findAll('tr')[1:]`
+```python
+rows = stat_tables[0].findAll('tr')[1:]
+```
 
 The first row is now our column headers, but they are mixed with a bunch of other html stuff that we aren't interested in. The first row looks like this:
  
-![header_row]()
+![header_row](/assets/images/blog_posts/web-scraping-basketball-stats-in-python-with-selenium-and-beautiful-soup/header_row.png)
 
-How to we pull out the strings we need? Let's look at the following code:
+How do we pull out the strings we need? Let's look at the following code:
 
 ```python
 headers = rows[0].findAll('th')
@@ -147,7 +148,7 @@ The code above first pulls out each individual column header, which are the <th>
 
 Perfect. Now for the rows of data. Let's look at the first row:
 
-![data_row_1]()
+![data_row_1](/assets/images/blog_posts/web-scraping-basketball-stats-in-python-with-selenium-and-beautiful-soup/data_row_1.png)
 
 Here we see another complication. The player name is in an <a> element within a <th> element, but the stats are all in <td> elements. There are a few ways to approach this, but I will pull out the player names and put them in their own list, then put the rows of data in a separate list. I can combine them later on.
 
@@ -156,7 +157,8 @@ data = rows[1:]
 # get names column
 player_names = [row.find('th').text.strip() for row in rows]
 # get player stats
-player_stats = [[stat.text.strip() for stat in row.findAll('td')] for row in data]`
+player_stats = [[stat.text.strip() for stat in row.findAll('td')] for row in data]
+```
 
 Now that everything has been trimmed down to just the raw data, it is straightforward enough to clean and put it all together in a dataframe:
 
@@ -174,9 +176,8 @@ player_box_df.rename(columns={'Starters':'Players'}, inplace=True)
 
 And here is the result:
 
-![boxsccore_df]()
+![boxsccore_df](/assets/images/blog_posts/web-scraping-basketball-stats-in-python-with-selenium-and-beautiful-soup/boxscore_df.png)
 
 Of course, this is only for one team. The next step would be to write some functions and loop them so that the code will automatically create and reformat the data as needed.
   
-At this point, you might be thinking that transcribing the 2 boxscores by hand would have porbably taken less time. And you would be right. But the real power of web scraping comes from automation of large tasks. Once the code is written to get data from a single webpage, it can be scaled up to include thousands of webpages with relative ease. Maybe next time I will take a look at how to effectively scale up your web scraper. Let me know what you think!
--->
+At this point, you might be thinking that transcribing the 2 boxscores by hand would have porbably taken less time. And you would be right. But the real power of web scraping comes from automation of large tasks. Once the code is written to get data from a single webpage, it can be scaled up to include thousands of webpages with relative ease. Next time I will take a look at how to effectively scale up your web scraper. Let me know what you think!
