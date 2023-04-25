@@ -105,8 +105,9 @@ parser = BeautifulSoup(src, 'lxml')
 
 Here, `'lxml'` is telling Beautiful Soup that our webpage is either html or xml, and turns the webpage into a Beautiful Soup object that can be further manipulated. So what do we need now? There are 2 boxscore tables and I want to put the stats from each into a dataframe, so I need to pull out the column headers and each row of data. The tables, as a reminder, have the following html tags: 
 
-Phoenix: <table class="sortable stats_table now_sortable" id="box-PHO-game-basic" data-cols-to-freeze=",1">
-Boston: <table class="sortable stats_table now_sortable" id="box-BOS-game-basic" data-cols-to-freeze=",1">
+Phoenix: table class="sortable stats_table now_sortable" id="box-PHO-game-basic"
+  
+Boston: table class="sortable stats_table now_sortable" id="box-BOS-game-basic"
 
 Here, we can see the the tag attributes are not identical. They have different ids, but the class is the same for each. If these two tables are the only ones with that class, things will be much simpler. Let's check:
 
