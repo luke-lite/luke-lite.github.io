@@ -8,12 +8,13 @@ tags:
   - python
   - web scraping
   - selenium
+  - beautiful soup
   - nba
 ---
 <!--
 _using Selenium and Beautiful Soup_
 
-Getting the right data is hard. In fact, it's almost always the hardest, longest, and most arduous part. I recently needed to get a huge amount of NBA stats for a project I'm working on. I knew the information existed, spread across a number of publicly available websites, but I had no easy way to directly access it. The answer was web scraping.
+Getting the right data is hard. In fact, it's almost always the hardest, longest, and most arduous part. I recently needed to get a huge amount of NBA stats for a project I'm working on. I knew the information existed, spread across a number of publicly available websites, but I had no easy way to directly access it. The answer was web scraping. If you are interested in following along step-by-step, you can find a jupyter notebook in the [github repo]() that has everything you need to run the code yourself.
 
 **Note:** this article assumes a basic knowledge of python.
 {: .notice--primary}
@@ -78,68 +79,88 @@ Opening the path for this <div> tag shows the table nested within, and within th
 
 The important things to note are the various sections: <thead> contains the column headers, and <tbody> contains each <tr> (table row), and within each row is the individual <td> cells with the data. Now we know the exact html path for the data we need!
 
-I can use Selenium to access the webpage by activating a driver. I am using Chrome as my web browser, but if you are using something different be sure to change the driver in the code:
+I can use Selenium to access the webpage by activating a driver. I am using Chrome as my web browser, but if you are using something different be sure to change the driver in the following line of code:
 
-;;;;;;;;;;;;
+```python
+driver = webdriver.Chrome()
+```
 
 This will open a seperate Chrome window that should be mostly blank with the message:  "Chrome is being controlled by automated test software." You now have a Chrome instance that you can control with your code. Next, open the url using the following line of code:
 
-;;;;;;;;;;;;;
+```python
+url = 'https://www.basketball-reference.com/boxscores/197606040BOS.html'
+driver.get(url)
+```
 
-Now the Chrome test window should be at the url we need. We can get the webpage source code with the following line:
+Now the Chrome test window should be at the url we need. We can get the webpage data with the following line:
 
-`src = driver.page_source`
+```python
+src = driver.page_source
+```
 
 And with that, we are done with Selenium for the time being. There are a lot of other great features that Selenium offers, like being able to interact with dynamic elements of a webpage such as clicking buttons, enter information into fields, and selecting items from a drop-down menu, but I will save those topics for a different time. Now we will switch to Beautiful Soup to pull out the information we need from the source code:
 
-`parser = BeautifulSoup(src, 'lxml')`
+```python
+parser = BeautifulSoup(src, 'lxml')
+```
 
-Here, `'lxml'` is telling Beautiful Soup that our webpage is either html or xml, and turns the webpage into a Beautiful Soup object that can be further manipulated. So what do we need now? There are 2 boxscore tables and I want to put the stats from each into a dataframe, so I need to pull out the column headers and each row of data. The tables, as a reminder, have the folling html tags: 
+Here, `'lxml'` is telling Beautiful Soup that our webpage is either html or xml, and turns the webpage into a Beautiful Soup object that can be further manipulated. So what do we need now? There are 2 boxscore tables and I want to put the stats from each into a dataframe, so I need to pull out the column headers and each row of data. The tables, as a reminder, have the following html tags: 
 
-;;;;;;;;;
-;;;;;;;;
+Phoenix: <table class="sortable stats_table now_sortable" id="box-PHO-game-basic" data-cols-to-freeze=",1">
+Boston: <table class="sortable stats_table now_sortable" id="box-BOS-game-basic" data-cols-to-freeze=",1">
 
 Here, we can see the the tag attributes are not identical. They have different ids, but the class is the same for each. If these two tables are the only ones with that class, things will be much simpler. Let's check:
 
-`stat_tables = parser.findAll('table', attrs = {'class': 'sortable stats_table now_sortable'})
-len(stat_tables)`
+```python
+stat_tables = parser.findAll('table', attrs = {'class': 'sortable stats_table now_sortable'})
+```
 
-Here `findAll()` searches for every 'table' tag on the webpage where `'class'` is equal to `'sortable stats_table now_sortable'`. There are 2 items in the list, and they are the two tables we need! Now let's get the table data, which as a reminder are located in the following tags:
 
-;;;;;;;;;;
+Here `findAll()` searches for every 'table' tag on the webpage where `'class'` is equal to `'sortable stats_table now_sortable'`. As it turns out, there are only 2 items in the list, and they are the two tables we need! Now let's get the table data.
 
-So we need to get the column headers and cells. Looking at the nested tags within the table, we can see that both the column headers and rows are in <tr> tags. The column headers are nested in the <thead> and the individual data cells are in the <tbody> tag. The simplest method would be just to grab all <tr> elements within the table, but we need to make sure that there aren't other <tr> elements that we will accidentally grab as well. After looking around, it appears there are some unnecessary <tr> elements in the table header and footer, but since they are at the beginning and end, they should be fairly easy to account for. Let's pull all <tr> elements from the first table and see what happens:
+We need to get the column headers and cells. Looking at the nested tags within the table, we can see that both the column headers and rows are in <tr> tags. The column headers are nested in the <thead> element and the individual data cells are in the <tbody> element. The simplest method would be just to grab all <tr> elements within the table, but we need to make sure that there aren't other <tr> elements that we accidentally grab as well. After looking around, it appears there are some unnecessary <tr> elements in the table header, but since they are at the beginning, they should be fairly easy to account for. Let's pull all <tr> elements from the first table and see what happens. From here on out I will focus on just the first table:
 
-`rows = stat_tables[0].findAll('tr')`
+```python
+rows = stat_tables[0].findAll('tr')
+```
 
-We definitely have some elements we aren't interested in. The very first element in the list is an 'overheader' column, but the rest appear to be exactly what we want. Let's ignore the first element this time:
+Looking at the results, the very first element in the list is an 'overheader' column, but the rest of them appear to be exactly what we want. Let's ignore the first element this time:
 
 `rows = stat_tables[0].findAll('tr')[1:]`
 
-The first row is now our column headers, but they are mixed with a bunch of other html nonsense that we aren't interested in. How to we put out the strings we need? Let's look at the following code:
+The first row is now our column headers, but they are mixed with a bunch of other html stuff that we aren't interested in. The first row looks like this:
+ 
+![header_row]()
 
-`headers = rows[0].findAll('th')
-headerlist = [h.text.strip() for h in headers]`
+How to we pull out the strings we need? Let's look at the following code:
 
-So first we pull out each individual column header, which are the <th> elements in the first row. We can get the raw string by converting the <th> element with the `.text` method, resulting in a list like this:
+```python
+headers = rows[0].findAll('th')
+headerlist = [h.text.strip() for h in headers]
+```
 
-;;;;;;;;;;;;;['Starters', 'MP', 'FG', 'FGA', 'FG%', 'FT', 'FTA', 'FT%', 'ORB', 'DRB', 'TRB', 'AST', 'STL', 'BLK', 'TOV', 'PF', 'PTS']
+The code above first pulls out each individual column header, which are the <th> elements in the first row. We can get the raw string by converting the <th> element with the `.text` method, resulting in a list like this:
+
+```python
+['Starters', 'MP', 'FG', 'FGA', 'FG%', 'FT', 'FTA', 'FT%', 'ORB', 'DRB', 'TRB', 'AST', 'STL', 'BLK', 'TOV', 'PF', 'PTS']
+```
 
 Perfect. Now for the rows of data. Let's look at the first row:
 
-;;;;;;;;;
+![data_row_1]()
 
-Here we see another complication. The player name is in an <a> element within a <th> element, but the stats are all in <td> elements. There are a few ways to approach this, but I will pull out the player names and put them in their own list, then put the rows of data in a separate list. Then I can combine them later.
+Here we see another complication. The player name is in an <a> element within a <th> element, but the stats are all in <td> elements. There are a few ways to approach this, but I will pull out the player names and put them in their own list, then put the rows of data in a separate list. I can combine them later on.
 
-`data = rows[1:]
+```python
+data = rows[1:]
 # get names column
 player_names = [row.find('th').text.strip() for row in rows]
 # get player stats
 player_stats = [[stat.text.strip() for stat in row.findAll('td')] for row in data]`
 
-Now that everything has been trimmed down to just the raw data, it is straightforward enough to put it all together in a dataframe:
+Now that everything has been trimmed down to just the raw data, it is straightforward enough to clean and put it all together in a dataframe:
 
-`
+```python
 for i in range(len(player_stats)):
     # ignore header with i+1
     player_stats[i].insert(0, player_names[i+1])
@@ -149,11 +170,11 @@ player_box_df = pd.DataFrame(player_stats, columns=headerlist)
 # drop 'Reserves' row
 player_box_df.drop(player_box_df[player_box_df['Starters'] == 'Reserves'].index, inplace=True)
 player_box_df.rename(columns={'Starters':'Players'}, inplace=True)
-`
+```
 
 And here is the result:
 
-;;;;;;;;;;;;
+![boxsccore_df]()
 
 Of course, this is only for one team. The next step would be to write some functions and loop them so that the code will automatically create and reformat the data as needed.
   
