@@ -11,7 +11,8 @@ tags:
   - selenium
   - nba
 ---
-<!-- _using Selenium and Beautiful Soup_
+<!--
+_using Selenium and Beautiful Soup_
 
 Getting the right data is hard. In fact, it's almost always the hardest, longest, and most arduous part. I recently needed to get a huge amount of NBA stats for a project I'm working on. I knew the information existed, spread across a number of publicly available websites, but I had no easy way to directly access it. The answer was web scraping.
 
@@ -152,4 +153,5 @@ And here is the result:
 
 Of course, this is only for one team. The next step would be to write some functions and loop them so that the code will automatically create and reformat the data as needed.
   
-At this point, you might be thinking that transcribing the 2 boxscores by hand would have porbably taken less time. And you would be right. But the real power of web scraping comes from automation of large tasks. Once the code is written to get data from a single webpage, it can be scaled up to include thousands of webpages with relative ease. Maybe next time I will take a look at how to effectively scale up your web scraper. Let me know what you think!-->
+At this point, you might be thinking that transcribing the 2 boxscores by hand would have porbably taken less time. And you would be right. But the real power of web scraping comes from automation of large tasks. Once the code is written to get data from a single webpage, it can be scaled up to include thousands of webpages with relative ease. Maybe next time I will take a look at how to effectively scale up your web scraper. Let me know what you think!
+-->
