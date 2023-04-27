@@ -9,6 +9,8 @@ tags:
   - python
   - mathematics
 ---
+![primes-splash](/assets/images/blog_posts/solving-for-primes-in-python/primes-splash.jpg)
+
 This is a classic coding problem that provides a lot of opportunity for creativity and ingenuity, in part because there are a number of ways to approach the problem. As is often the case, there are also a lot of small optimizations that can be found depending on what you are prioritizing. Today I want to look at a few ways to approach this problem, ending with a look at a special method I have always found fascinating: the **Sieve of Eratosthenes**.
 
 Before we jump into the code, a quick mathematics refresher: what is a prime number? A prime number is a whole number greater than 1 that is not a product of two smaller whole numbers. Alternatively, it is a number that is only cleanly divisible by itself and 1. Any whole number greater than 1 that is not a prime number is a composite number. So the first challenge will be to determine whether a given number is prime or composite.
@@ -136,7 +138,7 @@ When determining if `x` is prime, we first had to divide `x` by every smaller in
 
 On the other hand, how easy is it to determine if a given number is *not prime* (composite)? The answer, as it turns out, is very easy. One way is to simply find all the multiples of each prime number, starting with 2. We can eliminate the multiples since they can't be prime if they are divisible by 2. So with a minimal number of calculations, we have effectively removed half of the possible numbers from consideration (all even numbers). The next remaining number in the list of possible primes is 3. So we then remove all multiples of 3. The next remaining number is 5, because 4 was removed from consideration as it was a multiple of 2. We repeat this process up to $$\sqrt{x}$$ until we have removed all composite numbers, leaving only the primes! Visually, it looks like this:
 
-![Sieve_of_Eratosthenes_animation](/assets/images/blog_posts/Sieve_of_Eratosthenes_animation.gif)
+![Sieve_of_Eratosthenes_animation](/assets/images/blog_posts/solving-for-primes-in-python/Sieve_of_Eratosthenes_animation.gif)
 By SKopp at [German Wikipedia](https://upload.wikimedia.org/wikipedia/commons/b/b9/Sieve_of_Eratosthenes_animation.gif)
 
 Now that we understand how the sieve works, we need to put it into code. In order to do this, I will:
