@@ -18,7 +18,7 @@ Getting the right data is hard. In fact, it's almost always the hardest, longest
 **Note:** this article assumes a basic understanding of python.
 {: .notice--primary}
 
-In this article I will demonstrate a simple web scraping example for anyone who might be new to the process. It can seem daunting at first, but with a little bit of know-how it is very manageable. Today's example involves NBA stats, but the web scraping techniques I cover can be applied to most situations. It is worth noting that web scraping is rarely the first resort. If the website has a functioning API, then that is typically a much faster and easier way of getting the data you need. But there are a few problems with APIs. It may only allow you to get certain types of data, or may not include everything you need. Additionally, companies and services can change or end API access without warning. Nonetheless, always check for APIs first.
+In this article I will demonstrate a simple web scraping example for anyone who might be new to the process. It can seem daunting at first, but with a little bit of know-how it's very manageable. Today's example involves NBA stats, but the web scraping techniques I cover can be applied to most situations. It is worth noting that web scraping is rarely the first resort. If the website has a functioning API, then that is typically a much faster and easier way of getting the data you need. But there are a few problems with APIs. It may only allow you to get certain types of data, or may not include everything you need. Additionally, companies and services can change or end API access without warning. Nonetheless, always check for APIs first.
 
 Web scraping is the process of accessing a webpage, and pulling (or scraping) the information you want from it. If you only need a little information from just a page or two, it is easy enough to transcribe whatever you need. The real power of web scraping comes from the ability to automate the process in order to gather huge amounts of data.
 
@@ -26,7 +26,7 @@ While web scraping is a powerful tool, there are several dangers to consider. On
 
 Another danger is possible damage to the person or company who owns the site. Web scraping involves making calls to the server that is running the site. If done incorrectly, web scraping code can make rapid, repeated calls to the server, slowing down the site's performance for all users, and in extreme cases, can temporarily shut down a website.
 
-It is also considered good practice to check the site for any policies or TOS related to web scraping, even if the information is publicly available.  My web scraping example comes from [basketball-reference.com](https://www.basketball-reference.com/). They are the go-to site for any data-loving basketball fans, and have a massive amount of data across their site. They have a set of policies on web scraping that can be found on their parent company's website [here](https://www.sports-reference.com/data_use.html).
+It is also considered good practice to check the site for any policies or TOS related to web scraping, even if the information is publicly available.  My web scraping example comes from [basketball-reference.com](https://www.basketball-reference.com/). They are the go-to site for any data-loving basketball fans, and have a massive amount of data. They also have a set of policies on web scraping that can be found on their parent company's website [here](https://www.sports-reference.com/data_use.html).
 
 According to their policies, you can web scrape as long as you meet a series of requirements, including:
 
@@ -40,7 +40,7 @@ The first step is to find the information we want to scrape. For this example, I
 
 You can save yourself a lot of time and frustration by being certain what kind of information is accessible on the webpage and what exactly you need from it. There's a lot of information available on this webpage, but I'm only interested in the boxscores for each team. Now that I have identified the data I need, we can get our code ready to scrape it.
 
-I will be using two main packages: [Selenium](https://www.selenium.dev/selenium/docs/api/py/index.html) and [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/). Check the links if you need help installing them. It is worth noting that the simple web scraping I am going to demonstrate could be done using either package by itself, but I will introduce both since they are the two premier web scraping packages. In general, Beautiful Soup is easier to use, but has less functionality than Selenium.
+I will be using two main packages: [Selenium](https://www.selenium.dev/selenium/docs/api/py/index.html) and [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/). Check the links for documentation or if you need help installing them. It is worth noting that the web scraping I'm about to demonstrate could be done using either package by itself, but I will introduce both since they are the two premier web scraping packages. In general, Beautiful Soup is easier to use, but has less functionality than Selenium.
 
 To start, I need to import the necessary packages:
 
@@ -50,7 +50,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 ```
 
-Now I need to take a closer look at the webpage. Interacting with the various elements of the webpage requires a little knowledge about how a webpage is displayed, but I promise to only keep things on a need-to-know basis for this demonstration. Most webpages are constructed using html or xml. There is a lot more going on, of course, but for now we will focus on that. To get a better look at the webpage's underlying code, you can simply right-click on the webpage and select 'Inspect'. This will pull up a Developer Tools window that contains detailed information about what is happening under the hood. It may look a bit different depending on your OS and browser, but it should look something like this (I'm using Windows Chrome):
+Now I need to take a closer look at the webpage. Interacting with the various elements of the webpage requires a little knowledge about how a webpage is displayed, but I promise to only keep things on a need-to-know basis for this demonstration. To get a better look at the webpage's underlying code, you can simply right-click anywhere on the webpage and select 'Inspect'. This will pull up a Developer Tools window that contains detailed information about what is happening under the hood. It may look a bit different depending on your OS and browser, but it should look something like this (I'm using Windows Chrome):
 
 ![developer_tools](/assets/images/blog_posts/web-scraping-basketball-stats-in-python-with-selenium-and-beautiful-soup/developer_tools.png)
 
@@ -58,7 +58,7 @@ The sheer amount of information can be a little overwhelming, but we want to foc
 
 ![developer_tools_highlight](/assets/images/blog_posts/web-scraping-basketball-stats-in-python-with-selenium-and-beautiful-soup/developer_tools_highlight.png)
 
-This displays all the basic information contained on the webpage, but stripped of all visual elements. The important thing to keep in mind is that html is written using tags, indicated by <> brackets. For example, the "header" section is usually denoted by the <head> tag. Within the <head> tag might just be a single picee of text, or it may have a series of other tags nested within it, depending on the complexity of the webpage. But everything between <head> and </head> (end tags include a '/') is considered to be part of the <head> section.
+This displays all the basic information contained on the webpage. The important thing to keep in mind is that html is written using tags, indicated by <> brackets. For example, a "header" section is usually denoted by the <head> tag. Within the <head> tag might just be a single picee of text, or it may have a series of other tags nested within it, depending on the complexity of the webpage. But everything between <head> and </head> (end tags include a '/') is considered to be part of the <head> section.
 
 As you can see by looking through the html on this page, the nested structures can get very large, very fast. Instead of searching through all the tags to find the information we need, we can get it directly by right-clicking the specific information we want and selecting 'Inspect'. Since I want the boxscores, I will right click the "Phoenix Suns Basic and Advanced Stats" title here:
 
@@ -78,13 +78,13 @@ Opening the path for this <div> tag shows the table nested within, and within th
 
 The important things to note are the various sections: <thead> contains the column headers, and <tbody> contains each <tr> (table row), and within each row is the individual <td> cells with the data. Now we know the exact html path for the data we need!
 
-I can use Selenium to access the webpage by activating a driver. I am using Chrome as my web browser, but if you are using something different be sure to change the driver in the following line of code:
+I can use Selenium to access the webpage by activating a driver. I am using Chrome as my web browser, but be sure to choose the right browser if you run this yourself:
 
 ```python
 driver = webdriver.Chrome()
 ```
 
-This will open a seperate Chrome window that should be mostly blank with the message:  "Chrome is being controlled by automated test software." You now have a Chrome instance that you can control with your code. Next, open the url using the following line of code:
+This will open a seperate Chrome window that should be mostly blank with the message:  "Chrome is being controlled by automated test software." You now have a Chrome instance that you can control with your code. Next, open the url using the following lines of code:
 
 ```python
 url = 'https://www.basketball-reference.com/boxscores/197606040BOS.html'
@@ -118,7 +118,7 @@ stat_tables = parser.findAll('table', attrs = {'class': 'sortable stats_table no
 
 Here `findAll()` searches for every 'table' tag on the webpage where `'class'` is equal to `'sortable stats_table now_sortable'`. As it turns out, there are only 2 items in the list, and they are the two tables we need! Now let's get the table data.
 
-We need to get the column headers and cells. Looking at the nested tags within the table, we can see that both the column headers and rows are in <tr> tags. The column headers are nested in the <thead> element and the individual data cells are in the <tbody> element. The simplest method would be just to grab all <tr> elements within the table, but we need to make sure that there aren't other <tr> elements that we accidentally grab as well. After looking around, it appears there are some unnecessary <tr> elements in the table header, but since they are at the beginning, they should be fairly easy to account for. Let's pull all <tr> elements from the first table and see what happens. From here on out I will focus on just the first table:
+We need to get the column headers and cells. Looking at the nested tags within the table, I found that both the column headers and rows are in <tr> tags. The simplest method would be just to grab all <tr> elements within the table, but we need to make sure that there aren't other <tr> elements that we accidentally grab as well. After looking around, it appears there is one unnecessary <tr> element in the table header, but since it is the first one, it should be fairly easy to account for. Let's pull all <tr> elements from the first table and see what happens:
 
 ```python
 rows = stat_tables[0].findAll('tr')
@@ -181,4 +181,4 @@ And here is the result:
 
 Of course, this is only for one team. The next step would be to write some functions and loop them so that the code will automatically create and reformat the data as needed.
   
-At this point, you might be thinking that transcribing the 2 boxscores by hand would have porbably taken less time. And you would be right. But the real power of web scraping comes from automation of large tasks. Once the code is written to get data from a single webpage, it can be scaled up to include thousands of webpages with relative ease. Next time I will take a look at how to effectively scale up your web scraper. Let me know what you think!
+At this point, you might be thinking that transcribing the 2 boxscores by hand would have probably taken less time. And you would be right. But the real power of web scraping comes from automation of large tasks. Once the code is written to get data from a single webpage, it can be scaled up to include thousands of webpages with relative ease. Next time I will take a look at how to effectively scale up your web scraper. Let me know what you think!
