@@ -13,6 +13,8 @@ tags:
 ---
 _using Selenium and Beautiful Soup_
 
+![nba-splash](/assets/images/blog_posts/web-scraping-basketball-stats-in-python-with-selenium-and-beautiful-soup/nba-splash.jpg)
+
 Getting the right data is hard. In fact, it's almost always the hardest, longest, and most arduous part. I recently needed to get a huge amount of NBA stats for a project I'm working on. I knew the information existed, spread across a number of publicly available websites, but I had no easy way to directly access it. The answer was web scraping. If you are interested in following along step-by-step, you can find a jupyter notebook in my [github repo](https://github.com/luke-lite/web-scraping-demo) that has everything you need to run the code yourself.
 
 **Note:** this article assumes a basic understanding of python.
