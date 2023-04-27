@@ -10,9 +10,9 @@ tags:
   - matplotlib
   - seaborn
 ---
-![boxplot-splash](/assets/images/blog_posts/making-boxplots-more-effective/boxplot-splash.png)
+_Using markers, text, and selective data to improve your visualizations_
 
-<small>Using markers, text, and selective data to improve your visualizations.</small>
+![boxplot-splash](/assets/images/blog_posts/making-boxplots-more-effective/boxplot-splash.png)
 
 Box plots are a personal favorite of mine. They can show a great deal of information in a relatively straightforward and comprehensible manner. But because of the amount of information they convey, it is easy to create a box plot that is an unintelligible mess. Here are some tips on how to improve your box plots to make them more streamlined and effective.
 
