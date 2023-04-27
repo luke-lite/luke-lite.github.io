@@ -10,6 +10,7 @@ tags:
   - matplotlib
   - seaborn
 ---
+![boxplot-splash](/assets/images/blog_posts/making-boxplots-more-effective/boxplot-splash.png)
 
 <small>Using markers, text, and selective data to improve your visualizations.</small>
 
