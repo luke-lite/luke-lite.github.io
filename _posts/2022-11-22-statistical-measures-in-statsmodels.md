@@ -10,9 +10,9 @@ tags:
   - statsmodels
   - linear regression
 ---
-![stats-splash](/assets/images/blog_posts/statistical-measures-in-statsmodels/stats-splash.jpg)
+_How to interpret and validate your statistical models_
 
-<small>How to interpret and validate your statistical models.</small>
+![stats-splash](/assets/images/blog_posts/statistical-measures-in-statsmodels/stats-splash.jpg)
 
 The statsmodels package in python is a very handy tool for evaluating statistical models. It provides an easy way to get a plethora of information on a given model. However, the model summaries can be overwhelming for people who don't have a background in statistics or mathematics. This article will help you understand the statistical measures that statsmodels provides, allowing you to effectively evaluate your models.
 
