@@ -10,6 +10,7 @@ tags:
   - statsmodels
   - linear regression
 ---
+![stats-splash](/assets/images/blog_posts/statistical-measures-in-statsmodels/stats-splash.jpg)
 
 <small>How to interpret and validate your statistical models.</small>
 
