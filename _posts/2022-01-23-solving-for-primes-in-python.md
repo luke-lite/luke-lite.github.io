@@ -15,7 +15,7 @@ This is a classic coding problem that provides a lot of opportunity for creativi
 
 Before we jump into the code, a quick mathematics refresher: what is a prime number? A prime number is a whole number greater than 1 that is not a product of two smaller whole numbers. Alternatively, it is a number that is only cleanly divisible by itself and 1. Any whole number greater than 1 that is not a prime number is a composite number. So the first challenge will be to determine whether a given number is prime or composite.
 
-For my first attempt, I kept things basic. The function below takes a given object (x) and checks if it is an integer. If so, it checks if it is greater than 2. Then, it attempts to divide that number by each integer between 2 and x. If any of the results are a whole number, then that number is a composite, not a prime.
+For my first attempt, I kept things basic. The function below takes a given object (x) and checks if it is an integer. If so, it checks if it is greater than 2. Then, it attempts to divide that number by each integer between 2 and x. If any of the results are a whole number, then x is a composite, not a prime.
 
 ```python
 def is_prime(x):
@@ -48,7 +48,7 @@ Output:
 5 is prime: True
 ```
 
-It works, but how can we improve it? One way would be to increase the speed. For small numbers the computing time is negligible, but for larger numbers, the function is dividing x by every smaller integer. Another way to put this is that `x` is divided `x-2` times. This means if `x=100`, then the function is performing division 98 times. Can this be reduced? Yes!
+It works, but how can we improve it? One way would be to increase the speed. For small numbers the computing time is negligible, but for larger numbers, the function is dividing x by every smaller integer. Another way to put this is that `x` is divided `x-2` times. This means if `x=100`, then the function is performing division 98 times. Can this be reduced? Absolutely.
 
 To think about how we can reduce the number of calculations, let's use `x=16` as an example. To find if it is a prime, we are currently dividing 16 by each number from 2-15. Since 16 is not a prime, we know that at least one combination of whole numbers can be multiplied to equal 16, but what are the combinations? Let's check each possibility by hand:
 
@@ -103,7 +103,7 @@ Output:
 True
 ```
 
-It's a small change, but it efectively halves the number of calculations when solving for a prime number, which becomes exponentially more efficient as the numbers get larger and larger.
+It's a small change, but it effectively halves the number of calculations when solving for a prime number, which becomes exponentially more efficient as the numbers get larger and larger.
 
 The method above works well when determining if a given number `x` is prime, but what if we want to find all the prime numbers up to a given number `x`? In this instance, if `x=20`, we want a function that will return all primes: 2, 3, 5, 7, 11, 13, 17, 19.
 
@@ -130,28 +130,29 @@ Output:
 
 Great, it works! But this is terribly inefficient. There are a lot of repetitive and unnecessary steps since the function has to individually check every number in the list and perform many calculations to determine if each is prime. How can we solve for primes without having to prove each number up to `x` is prime?
 
-One answer lies in the **Sieve of Eratosthenes**, an algorithm first referenced in the 2nd Century CE Ancient Greek text *Introduction to Algebra* and attributed to Eratosthenes of Cyrene, a Greek mathematician from the 3rd Century BCE. It is worth noting that this is not the only 'prime sieve' to exist. In fact, there are a number of sieves that have been developed that are even more effective than the Sieve of Eratosthenes, but Eratosthenes' is one of the simplest and least complex, so it is perfect for our current purpose.
+One answer lies in the **Sieve of Eratosthenes**, an algorithm first referenced in the 2nd Century CE Ancient Greek text *Introduction to Algebra* and attributed to Eratosthenes of Cyrene, a Greek mathematician from the 3rd Century BCE.
 
-This method functions in a seemingly backwards fashion. Instead of identifying all the prime numbers up to a given number `x`, the Sieve of Eratosthenes identifies all the composite numbers and removes them, leaving only the prime numbers! Though this seems backwards, it turns out that identifying composities is a lot easier than identifying primes. If we think back to our earlier attempts, we can see why this is.
+**Note:** this is not the only 'prime sieve' to exist. In fact, there are a number of sieves that have been developed that are even more effective than the Sieve of Eratosthenes, but Eratosthenes' is one of the most straightforward, so it is perfect for our current purpose.
+{: .notice--primary}
+
+This method functions in a seemingly backwards fashion. Instead of identifying all the prime numbers up to a given number `x`, the Sieve of Eratosthenes identifies all the composite numbers and removes them, leaving only the prime numbers. Though this seems backwards, it turns out that identifying composities is a lot easier than identifying primes. If we think back to our earlier attempts, we can see why this is.
 
 When determining if `x` is prime, we first had to divide `x` by every smaller integer betweeen 2 and `x`. Even after our improvement of using $$\sqrt{x}$$ instead of `x`, there are still a lot of calculations that need to be performed before we can verify that `x` is prime, and the number of calculations increases exponentially as `x` increases.
 
-On the other hand, how easy is it to determine if a given number is *not prime* (composite)? The answer, as it turns out, is very easy. One way is to simply find all the multiples of each prime number, starting with 2. We can eliminate the multiples since they can't be prime if they are divisible by 2. So with a minimal number of calculations, we have effectively removed half of the possible numbers from consideration (all even numbers). The next remaining number in the list of possible primes is 3. So we then remove all multiples of 3. The next remaining number is 5, because 4 was removed from consideration as it was a multiple of 2. We repeat this process up to $$\sqrt{x}$$ until we have removed all composite numbers, leaving only the primes! Visually, it looks like this:
+On the other hand, how easy is it to determine if a given number is *not prime*? The answer, as it turns out, is very easy. One way is to simply find all the multiples of each prime number, starting with 2. We can eliminate the multiples since they can't be prime if they are divisible by 2. So with a minimal number of calculations, we have effectively removed half of the possible numbers from consideration (all even numbers). The next remaining number in the list of possible primes is 3. So we then remove all multiples of 3. The next remaining number is 5, because 4 was removed from consideration as it was a multiple of 2. We repeat this process up to $$\sqrt{x}$$ until we have removed all composite numbers, leaving only the primes. Visually, it looks like this:
 
 ![Sieve_of_Eratosthenes_animation](/assets/images/blog_posts/solving-for-primes-in-python/Sieve_of_Eratosthenes_animation.gif)
 By SKopp at [German Wikipedia](https://upload.wikimedia.org/wikipedia/commons/b/b9/Sieve_of_Eratosthenes_animation.gif)
 
 Now that we understand how the sieve works, we need to put it into code. In order to do this, I will:
 
- - create a list of numbers from 2 to x.
+ - create a list of numbers from 2 to `x`.
  - starting at 2, remove all multiples of each prime from the list
  - repeat up to the value of $$\sqrt{x}$$
- 
-We can stop searching for multiples of primes at $$\sqrt{x}$$ for the same reasons we discussed earlier (no new prime factors).
 
 ```python
 def sieve_of_eratosthenes(x):
-  # list of possible primes
+ # list of possible primes
  prime_list = list(range(2, x+1))
  p = 2
  # stop checking at sqrt(x)
@@ -200,7 +201,7 @@ def sieve_optimized(x):
 
   return prime_list
 
-sieve_of_eratosthenes(30)
+sieve_optimized(30)
 ```
 
 Output:
@@ -209,8 +210,4 @@ Output:
 [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
 ```
 
-We have now covered many of the ways in which you can solve for prime numbers using Python. There are a multitude of other methods, however, and lots of small optimizations that I have not covered. If you have other methods of solving for primes I'd love to hear them. As I mentioned, there are also lots of other more complex prime sieves. If this is something you'd like to hear more about, let me know. I'd love to do another dive into more complex prime methods. You can contact me in the following ways:
-
-luke.lite.ds@gmail.com  <br>
-[linkedin](https://www.linkedin.com/in/luke-diperna/) <br>
-[github](https://github.com/luke-lite)
+We have now covered many of the ways in which you can solve for prime numbers using Python. There are a multitude of other methods, however, and lots of small optimizations that I have not covered. If you have other methods of solving for primes I'd love to hear them. As I mentioned, there are also lots of other more complex prime sieves. If this is something you'd like to hear more about, let me know. I'd love to do another dive into more complex prime methods.
