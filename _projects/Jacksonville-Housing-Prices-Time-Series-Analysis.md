@@ -11,6 +11,7 @@ categories:
 tags:
   - time series
   - forecasting
+  - housing
 ---
 ![jax_skyline]({{site.url}}/assets/images/teasers/jax_skyline.jpg)
 
@@ -35,7 +36,7 @@ The main dataset is a collection of monthly median housing prices from Zillow da
 
 I chose to remove the data prior to 2012. This is because this timeframe best captures the current state of the housing market. Prior to 2012, the housing market was tumultous due to the global financial crisis and housing bubble in 2008.
 
-In the Appendix, I use additional seasonal data from Zillow to demonstrate how a more nuanced analysis could be performed. Unfortunately, most of the seasonal data only goes back to 2018 is not available by zip code, but it still offers some insight when forecasting future house prices.
+In the Appendix, I use additional seasonal data from Zillow to demonstrate how a more nuanced analysis could be performed. Unfortunately, most of the seasonal data only goes back to 2018 and is not available by zip code, but it still offers some insight when forecasting future house prices.
 
 ## Exploratory Data Analysis
 
@@ -49,13 +50,13 @@ After a more detailed discussion with the client regarding their budget range, I
 
 ## Time Series Modeling
 
-When creating models, I used AIC to determine the best model
+When creating models, I used AIC to determine the best model.
 
 After examining the data, I decided to create a train-test split of 80-20. This was a key decision because of the difference in price growth between the two splits, which can be seen here:
 
 ![train_test_split]({{site.url}}/assets/images/project_posts/Jacksonville-Housing-Prices-Time-Series-Analysis-graphs/train_test_split.png)
 
-Starting around 2021, the housing prices begin to increase at a much faster rate before flattening out in the last few months. There are several factors for this, but the biggest one is the effect of the COVID pandemic and the resulting economic policies, such as a drastic and long laasting reduction in the interest rate, which contributed to a rapid rise in house prices.
+Starting around 2021, the housing prices begin to increase at a much faster rate before flattening out in the last few months. There are several factors for this, but the biggest one is the effect of the COVID pandemic and the resulting economic policies, such as a drastic and long lasting reduction in the interest rate, which contributed to a rapid rise in house prices.
 
 By training a model on pre-pandemic data, it is almost guaranteed to struggle at accounting for the change in price growth in the test set. Ultimately, I have decided to still create a model based on the training set because I believe that data is more indicative of the long term housing price growth, and as I demonstrate in the Appendix, it appears that the market is undergoing a correction that will likely return it to pre-pandemic levels.
 
@@ -63,7 +64,7 @@ I used the average median house price data from all Jacksonville zip codes to tr
 
 ![train_model_pred]({{site.url}}/assets/images/project_posts/Jacksonville-Housing-Prices-Time-Series-Analysis-graphs/train_model_pred.png)
 
-As expected, it was unable to anticipate the increase in price growth in the test set. However, I used the same parameters when training a model on the entire dataset, as it provided the best results. The diagnostics of the model trained on the entire set are shown below, and display the expected issues of an increase in residuals at the tail end, and deviation in the QQ-plot and correlogram:
+As expected, it was unable to anticipate the increase in price growth in the test set. However, I used the same parameters when training a model on the entire dataset for the reasons mentioned above. The diagnostics of the model trained on the entire set are shown below, and display the expected issues of an increase in residuals at the tail end, and deviation in the QQ-plot and correlogram:
 
 ![X_model_diag]({{site.url}}/assets/images/project_posts/Jacksonville-Housing-Prices-Time-Series-Analysis-graphs/X_model_diag.png)
 
@@ -71,7 +72,7 @@ I then found the best model for each individual zipcode and made 2-year forecast
 
 ![jax_avg_forecast_2_yr]({{site.url}}/assets/images/project_posts/Jacksonville-Housing-Prices-Time-Series-Analysis-graphs/jax_avg_forecast_2_yr.png)
 
-The above forecast is indicative of the forecasts for each individual zip code. In fact, every model predicted a drop in price over the next 2 years.
+The above forecast is indicative of the forecasts for each individual zip code. In fact, every model predicted a drop in price over the next 2 years. However, the model confidence is low, as indicated by the size of the dark grey section.
 
 ## Results and Recommendations
 
@@ -79,12 +80,12 @@ These are the top 5 zip codes by ROI:
 
 ![zc_recommendations]({{site.url}}/assets/images/project_posts/Jacksonville-Housing-Prices-Time-Series-Analysis-graphs/zc_recommendations.png)
 
-These 5 zip codes are predicted to retain the most value over the next 2 years. While it is unfortunate for the client that no zip codes are expected to increase in price overall, in the Appendix I look at some additional data that suggests prices could begin rising again within the 2-year window. The top 5 zip codes have also been plotted on the map below:
+These 5 zip codes are predicted to retain the most value over the next 2 years. While it is unfortunate for the client that no zip codes are expected to increase in price overall, in the Appendix I look at some additional data that suggests prices could begin rising again within the 2-year window. I have also been plotted the top 5 zip codes on the map below:
 
 ![jax_zc_map]({{site.url}}/assets/images/project_posts/Jacksonville-Housing-Prices-Time-Series-Analysis-graphs/jax_zc_map.jpg)
 
 ## Appendix
 
-I examine some additional seasonal data from Zillow as well as the historical interest rate in the US as set by the Federal Reserve. The data reinforces that the housing market was undergoing an unusual growth phase between 2020 and late 2022, and appears to be heading for a dip as 2023 begins.
+I examine some additional seasonal data from Zillow as well as the historical interest rate in the US as set by the Federal Reserve. The data reinforces that the housing market was undergoing an unusual growth phase between 2020 and late 2022, and appears to be heading for a dip as 2023 begins. For a detailed look, see the [jupyter notebook](#https://github.com/luke-lite/Jacksonville-Housing-Prices-Time-Series-Analysis/blob/main/Jacksonville-Housing-Prices-Time-Series-Analysis.ipynb) on GitHub.
 
 The difficult part is anticipating when a recovery might occur. With the Federal Reserve publicly stating their intent to continue increasing interest rates through 2023, it is likely that house prices will continue to drop, but it is possible the market could rebound in 2024. Ultimately, the extra seasonal data was not enough to provide any definite conclusions, but it does help provide additional context to help inform the forecasts on the main dataset.
