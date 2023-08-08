@@ -7,6 +7,7 @@ categories:
 tags:
   - python
   - nba
+  - statistics
 ---
 _A simple and effective way to predict NBA game winners._
 
@@ -17,4 +18,6 @@ I recently worked on a project to predict the outcome of NBA games. I had data o
 **Note:** this article assumes a basic understanding of python.
 {: .notice--primary}
 
-The Elo rating system is named for the creator Arpad Elo. Originally designed to rank chess players, they can be used for any head-to-head competition
+The Elo rating system is named for the creator Arpad Elo. Originally designed to rank chess players, it can be used for any head-to-head competition. The Elo system I have created is based on the one used by FiveThirtyEight. They have a great article titled [How we Calculate NBA Elo Ratings](https://fivethirtyeight.com/features/how-we-calculate-nba-elo-ratings/) that I highly recommend reading, but it does not provide any actual code or implementation, so that is what I will do. There are a few basic rules that determine how the Elo system works:
+
+-
