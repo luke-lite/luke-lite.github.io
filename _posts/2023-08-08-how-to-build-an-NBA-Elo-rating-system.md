@@ -56,9 +56,77 @@ Another adjustment I use is home-court advantage. There is a notable home-court 
 
 So in total, all I need to calculate Elo rating is each team's initial Elo, the home and away team, and the final score. But there is one final consideration: seasonal adjustments. NBA rosters and staff can change dramatically over the course of an off-season, so the system needs some way to account for these potential changes. One option is to fully reset each teams Elo at the start of a new season. The baseline for my Elo system is 1500, which represents the score of an "average" NBA team. Alternatively, you could make no seasonal adjustments. More often than not, good teams remain good, and bad teams remain bad, but whenever that is not the case, the system will be very slow to reflect a team's "true" rating, which will impact predictions in the meantime.
 
-To account for seasonal adjustments, this Elo system does a partial reset: team's move toward the mean Elo rating of 1500, but retain 75% of their current rating. The formula is :
+To account for seasonal adjustments, this Elo system does a partial reset: each team's Elo moves toward the mean Elo rating of 1500, but retains 75% of the current rating. The formula is:
 
 $new_season_elo = (0.75*elo) + (0.25*1505)$
 
-Note that the mean is actually 1505. This is to account for league mergers, aquisitions, and expansions. The FiveThirtyEight article goes into some detail about why this is needed, but the good news is that we now have everything we need to build an Elo system. It is possible to increase the complexity of the system even further by adding adjustments for things like elevation, back-toback games, and road trips with consecutive games as the away team, but I will leave that possibility for another time. Now I need to write some code that will implement this system.
+Note that the mean is actually 1505. This is to account for league mergers, aquisitions, and expansions. See the FiveThirtyEight article if you want to learn more. The good news is that we now have everything we need to build an Elo system. It is possible to increase the complexity of the system even further by adding adjustments for things like elevation, back-to-back games, and road trips with consecutive away games, but I will leave that for another time. Now I need to write some code that will implement this system.
 
+This first function will calculate the K-factor for each game. All that is needed is the margin of victory, `MOV`, and the elo difference between the two teams:
+
+```
+def calc_K(MOV, elo_diff_winner):
+    K = 20 * ( (MOV + 3)**0.8 / (7.5 + 0.006*(elo_diff_winner)) )
+    return K
+```
+Next is the end-of-season adjustment:
+
+```
+def new_season_elo_adj(elo):
+    new_season_elo = (0.75*elo) + (0.25*1505)
+    return new_season_elo
+```
+Last is the function to actually take in each team's initial Elo and calculated the new ratings. In order to do this, I need each team's name, initial elo, and final score:
+
+```
+def update_elo(away_team, away_elo, away_score,
+               home_team, home_elo, home_score):
+
+    away_elo_og = away_elo
+    home_elo_og = home_elo
+
+    # set home court advantage
+    home_adv = 100
+    home_elo += home_adv
+
+    # determine winner/loser
+    if away_score > home_score:
+        
+        winner_score = away_score
+        winner_elo = away_elo
+        
+        loser_score = home_score
+        loser_elo = home_elo
+        
+        S_away = 1
+        S_home = 0
+    else:
+        winner = home_team
+        winner_score = home_score
+        winner_elo = home_elo
+        
+        loser_score = away_score
+        loser_elo = away_elo
+        S_away = 0
+        S_home = 1
+        
+    elo_diff_winner = winner_elo - loser_elo
+
+    # expected win probability
+    E_away = 1 / (1 + 10**((home_elo-away_elo)/400))
+    E_home = 1 / (1 + 10**((away_elo-home_elo)/400))
+    
+    MOV = winner_score - loser_score
+    
+    K = calc_K(MOV=MOV, elo_diff_winner=elo_diff_winner)
+
+    # calculate new elo
+    away_elo_new = K*(S_away-E_away) + away_elo_og
+    home_elo_new = K*(S_home-E_home) + home_elo_og
+    
+    return away_elo_new, home_elo_new
+```
+
+And just like that, you have everything you need to create your own Elo rating system. When testing this on a dataset of every regular season game over the past 10 seasons ([NBA Boxscore Dataset](https://www.kaggle.com/datasets/lukedip/nba-boxscore-dataset)), the system was able to predict 65.3% of games correctly! To see it in action, see my Jupyter notebook [NBA-Prediction-Modeling](https://github.com/luke-lite/NBA-Prediction-Modeling/blob/1c0603da44f49ed70f70fef6af07b8e450dbec00/NBA-Prediction-Modeling.ipynb). The Elo system can be found at the bottom of the modeling section. If you want, you can even run the notebook on your own or in Google Colab if you don't have a coding environment set up on your machine.
+
+Let me know what you think, and maybe I can create a more nuanced Elo rating system in the future.
