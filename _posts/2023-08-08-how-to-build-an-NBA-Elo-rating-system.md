@@ -26,9 +26,9 @@ The Elo rating system is named for the creator Arpad Elo. Originally designed to
 
 It's a surprisingly simple system, but has been proven to be very effective at ranking competitors and predicting match outcomes. The formula used to calculate a competitor's new Elo rating looks like this:
 
-$R_1 = R_0 + K(S-E)$
+$$R_1 = R_0 + K(S-E)$$
 
-$R_0$ is a team's current Elo rating, $R_1$ is the team's updated Elo rating after the game, $K$ is the constant used to determine the magnitude of the rating change, $S$ is the score/result, and $E$ is the expected win probability. For an NBA game, $S$ is either 1 for a win, or 0 for a loss. If a draw is possible, like in chess, then $S$ would be 0.5. $E$, the expected win probability, is slightly more complicated:
+$$R_0$$ is a team's current Elo rating, $R_1$ is the team's updated Elo rating after the game, $K$ is the constant used to determine the magnitude of the rating change, $S$ is the score/result, and $E$ is the expected win probability. For an NBA game, $S$ is either 1 for a win, or 0 for a loss. If a draw is possible, like in chess, then $S$ would be 0.5. $E$, the expected win probability, is slightly more complicated:
 
 $E_a = \frac{1}{1+10^\frac{elo_b - elo_a}{400}}$
 
