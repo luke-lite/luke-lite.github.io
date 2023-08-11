@@ -35,7 +35,7 @@ $$E_a = \frac{1}{1+10^\frac{elo_b - elo_a}{400}}$$
 
 where $$elo_a$$ is the team's current Elo and $$elo_b$$ is their opponent's current Elo. What does this mean in practice? If two teams have the exact same rating going into a match then the expectation should be that each team has an equal chance at winning. As we can see in the formula, if the Elo's are equal, then the denominator equals $$1+10^0$$, which makes $$E_a=1/2$$. Each team is expected to win 50% of the time. Likewise, if team A has a higher Elo rating than their opponent, they should have a higher expected win probability. For example, if team A's Elo is 1600, and team B's Elo is 1400, then
 
-$$\frac{1}{1+10^\frac{-200}{400}}$ -------> $\frac{1}{1+10^-0.5}$$
+$$\frac{1}{1+10^\frac{-200}{400}}$ -------> $\frac{1}{1+10^(-0.5)}$$
 
 As in the example above, if team A has a higher Elo, the power in the denominator is negative, resulting in a positive fraction:
 
