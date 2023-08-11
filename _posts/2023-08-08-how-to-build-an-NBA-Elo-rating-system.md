@@ -12,7 +12,7 @@ tags:
 ---
 _A simple and effective way to predict NBA game winners._
 
-![]
+![podium-splash](https://github.com/luke-lite/luke-lite.github.io/blob/c79219505f3503d8a40e1f069ef88a0e784a64fe/assets/images/blog_posts/how-to-build-an-NBA-Elo-rating-system/podium-splash.jpg)
 
 I recently worked on a project to predict the outcome of NBA games. I had data on tens of thousands of games, a variety of machine learning modeling techniques, and I ran countless tests to try and find the best method. But at the end of the day, the simplest method turned out to be one of the most effective: an Elo rating system. I will show you how to build an Elo system from scratch, including the math behind it and the code required to run it. While I used this system to predict NBA games, Elo systems are effective for a variety of competitions, and can be adjusted with relative ease.
 
