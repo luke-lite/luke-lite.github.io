@@ -59,7 +59,7 @@ So in total, all I need to calculate Elo rating is each team's initial Elo, the 
 
 To account for seasonal adjustments, this Elo system does a partial reset: each team's Elo moves toward the mean Elo rating of 1500, but retains 75% of the current rating. The formula is:
 
-$$new_season_elo = (0.75*elo) + (0.25*1505)$$
+$$new\_season\_elo = (0.75*elo) + (0.25*1505)$$
 
 Note that the mean is actually 1505. This is to account for league mergers, aquisitions, and expansions. See the FiveThirtyEight article if you want to learn more. The good news is that we now have everything we need to build an Elo system. It is possible to increase the complexity of the system even further by adding adjustments for things like elevation, back-to-back games, and road trips with consecutive away games, but I will leave that for another time. Now I need to write some code that will implement this system.
 
