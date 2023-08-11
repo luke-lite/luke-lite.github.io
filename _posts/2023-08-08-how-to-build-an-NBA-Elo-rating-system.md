@@ -2,6 +2,7 @@
 title: "How to Build an NBA Elo Rating System"
 last_modified_at: 2023-08-08T16:22:02-05:00
 classes: wide
+mathjax: true
 categories:
   - Blog
 tags:
